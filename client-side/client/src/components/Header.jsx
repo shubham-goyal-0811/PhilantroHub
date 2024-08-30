@@ -5,7 +5,7 @@ export default function Header() {
     <>
       <header>
         <nav className="header_nav w-full" style={{ padding: '0.5%' }}>
-          <div className="flex items-center justify-between">
+          <div className="flex w-full items-center justify-between">
 
             <div className="flex">
               <a href="" className="flex items-center left-0">
@@ -13,18 +13,22 @@ export default function Header() {
               </a>
             </div>
 
-            <div className="flex items-center lg:order-2 right-0 justify-center">
-              <a href="/" className="text-gray-800 dark:text-black hover:bg-gray-50 font-medium rounded-lg text-md" style={{ padding: '2%' }}>
-                Log in
-              </a>
-              <div className="searchBtn w-2/12">
-                <img src={Search} alt="" />
+            <div className="flex w-auto items-center lg:order-2 whitespace-nowrap">
+              <div className="login w-2/12">
+                <a href="/" className="text-gray-800 p-2 dark:text-black hover:bg-gray-50 font-medium rounded-lg text-md">
+                  Log in
+                </a>
               </div>
             </div>
 
-            <div className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1">
-              <div className="flex justify-center">
-                <ul className="flex flex-col font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+            <div className="flex w-2/12 items-center">
+              <div className="flex justify-evenly">
+                <ul className="flex font-medium justify-evenly items-center">
+                  <li className="w-2/12">
+                    <div className="search">
+                      <img src={Search} alt="" className="w-full" />
+                    </div>
+                  </li>
                   <li>
                     <a href="/" className="block text-gray-600 rounded lg:bg-transparent lg:text-primary-700 lg:p-0 hover:text-black">
                       Home
@@ -38,7 +42,7 @@ export default function Header() {
                 </ul>
               </div>
             </div>
-            
+
           </div>
         </nav>
       </header>
