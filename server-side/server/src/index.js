@@ -16,6 +16,6 @@ connectDb()
     }
 )
 .catch((error)=>{
-    console.log(`connection failed ${error}`)
+    console.log(`connection failed ${error}`);
 })
 
