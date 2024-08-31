@@ -1,8 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+:root{
+    --var1: #b5ab87;
+    --var2: #fcf9f0;
+}
 html, body {
     height: 100%;
+}
+.main1{
+    background-color: var(--var2);
 }
 .frontpage_main1, .frontpage_main2, .frontpape_part1, .frontpape_part2, .tbl{
     border: 1px solid red;
@@ -45,11 +52,13 @@ ul li a:hover{
 }
 .whatis .ans{
     border-radius: 6% 94% 9% 91% / 86% 12% 88% 14% ;
+    border-color: var(--var1);
 }
 .benefitstbl {
     border-radius: 0% 100% 100% 0% / 10% 7% 7% 10%;
+    border-color: var(--var1);
 }
 .howtotbl{
     border-radius: 100% 100% 100% 100% / 15% 0% 0% 15%;
-
+    border-color: var(--var1);
 }
