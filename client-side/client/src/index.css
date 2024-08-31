@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+html, body {
+    height: 100%;
+}
+.frontpage_main, .frontpape_main2{
+    border: 1px solid red;
+}
+.header_nav {
+    backdrop-filter: blur(10px);
+    background-color: rgba(221, 218, 218, 0.7);
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 50px;
+}
+.quotes{
+    border: 1px solid red;
+}  
+.title{
+    gap: 2%;
+}
