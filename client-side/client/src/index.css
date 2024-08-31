@@ -4,7 +4,7 @@
 html, body {
     height: 100%;
 }
-.frontpage_main, .frontpape_main2{
+.frontpage_main1, .frontpage_main2, .frontpape_part1, .frontpape_part2, .tbl{
     border: 1px solid red;
 }
 .header_nav {
@@ -17,4 +17,39 @@ html, body {
 }  
 .title{
     gap: 2%;
+}
+.logo img{
+    transition: 0.3s ease-in-out;
+}
+.logo:hover img{
+    transform: scale(1.2);
+}
+.login a{
+    transition: 0.3s ease-in-out;
+}
+.login:hover a{
+    background-color: white;
+}
+ul li a{
+    transition: 0.3s ease-in-out;
+}
+ul li a:hover{
+    transform: scale(1.2);
+    color: black;
+}
+.search img{
+    transition: 0.3s ease-in-out;
+}
+.search:hover img{
+    transform: scale(1.2);
+}
+.whatis .ans{
+    border-radius: 6% 94% 9% 91% / 86% 12% 88% 14% ;
+}
+.benefitstbl {
+    border-radius: 0% 100% 100% 0% / 10% 7% 7% 10%;
+}
+.howtotbl{
+    border-radius: 100% 100% 100% 100% / 15% 0% 0% 15%;
+
 }
