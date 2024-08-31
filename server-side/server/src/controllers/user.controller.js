@@ -4,7 +4,7 @@ import { uploadOnCloudinary } from '../utils/cloudinary.js';
 import { asyncHandler } from '../utils/AsyncHandler.js';
 import { ApiResponse } from '../utils/ApiResponse.js';
 import jwt from 'jsonwebtoken';
-
+import fs from 'fs';
 
 const generateAccessandRfreshToken = async (userId)=>{  
     try{
@@ -18,7 +18,7 @@ const generateAccessandRfreshToken = async (userId)=>{
         return {acessToken,refreshToken};
     }
     catch (error){
-        throw new ApiError(500, "Something Went Wrong while generating acces and refresh token");
+        throw new ApiError(500, "Something Went Wrong while generating access and refresh token");
     }
 }
 
@@ -46,13 +46,6 @@ const registerUser = asyncHandler(async (req,res) =>{
         throw new ApiError(400,"Please enter a valid mobile number");
     }
 
-    const existUser = await User.findOne({
-        $or:[{username} , {email}, {mobileNo}]
-    });
-    if(existUser){
-        throw new ApiError(409,"User with this email or Username or Mobile Number already exists");
-    }
-
     const idProofLocalPath = req.files?.idProof[0].path;
     let avatarLocalPath;
     if(req.files && Array.isArray(req.files.avatar) && req.files.avatar.length > 0){
@@ -63,12 +56,22 @@ const registerUser = asyncHandler(async (req,res) =>{
         throw new ApiError(400,"ID Proof document is required");
     }
 
-    console.log(idProofLocalPath);
+    const existUser = await User.findOne({
+        $or:[{username} , {email}, {mobileNo}]
+    });
+    if(existUser){
+        fs.unlinkSync(idProofLocalPath);
+        if(avatarLocalPath)    fs.unlinkSync(avatarLocalPath);
+        throw new ApiError(409,"User with this email or Username or Mobile Number already exists");
+    }
+
+    
     const idProof = await uploadOnCloudinary(idProofLocalPath);
     const avatar = await uploadOnCloudinary(avatarLocalPath);
 
     if(!idProof){
         throw new ApiError(500,"Something went wrong while Uploading the idProof");
+        
     }
 
     const user = await User.create({
@@ -82,7 +85,7 @@ const registerUser = asyncHandler(async (req,res) =>{
     })
 
     const userCreated = await User.findById(user._id).select(
-        "-password -refreshtoken"
+        "-password -refreshToken"
     )
 
     if(!userCreated){
@@ -95,6 +98,50 @@ const registerUser = asyncHandler(async (req,res) =>{
 
 })
 
+const loginUser = asyncHandler(async (req,res)=>{
+    const {username,email,mobileNo,password} = req.body;
+
+    if(!username && !email && !mobileNo){
+        throw new ApiError(400,"Kindly Fill Atleast one of the given fields");
+    }
+    
+    const user = await User.findOne({
+        $or: [{username},{email},{mobileNo}]
+    })
+
+    if(!user){
+        throw new ApiError(404,"User does not exist");
+    }
+
+    const isPassValid = await user.isPasswordCorrect(password);
+    if(!isPassValid){
+        throw new ApiError(401,"Invalid Password");
+    }
+
+    const {acessToken,refreshToken} = await generateAccessandRfreshToken(user._id);
+    user.refreshToken = refreshToken;
+    const loggedInUser = await User.findById(user._id).select("-password -refreshToken");
+
+    console.log(acessToken);
+    console.log(refreshToken);
+    
+    const options = {
+        httpOnly : true,
+        secure : true,  
+    }
+
+    return res.status(200).cookie("accessToken",acessToken,options).cookie("refreshToken",refreshToken,options)
+    .json(
+        new ApiResponse(200,{
+            user : loggedInUser,acessToken,refreshToken
+        },
+        "User Logged In Successfully"
+    )
+    )
+})
+
+
 export {
-    registerUser
+    registerUser,
+    loginUser
 }
