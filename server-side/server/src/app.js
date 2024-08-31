@@ -13,6 +13,7 @@ app.use(express.urlencoded({extended:true,limit:"16kb"}));//for data coming from
 app.use(express.static("public")) //to store some assets publically
 app.use(cookieparser());//used to access cookies of the browser
 
-
+import userRouter from './routes/user.routes.js';
+app.use("/api/v1/users",userRouter);
 
 export {app};
