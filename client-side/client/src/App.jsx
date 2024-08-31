@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Header from './components/Header';
-import Frontpage from './components/Frontpage';
+import Frontpage from './components/frontpage/Frontpage';
 
 function App() {
   return (
