@@ -11,7 +11,7 @@ html, body {
 .main1{
     background-color: var(--var2);
 }
-.frontpage_main1, .frontpage_main2, .frontpape_part1, .frontpape_part2, .tbl{
+.frontpage_main1, .frontpage_main2, .frontpage_main3, .frontpape_part3, .frontpape_part1, .frontpape_part2, .tbl{
     border: 1px solid red;
 }
 .header_nav {

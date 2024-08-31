@@ -2,7 +2,7 @@ import itachi from '../../img/itachi.jpg';
 export default function Page1() {
     return (
         <>
-            <div className="frontpage_main1 flex flex-col w-auto items-center" style={{ padding: '1%', height: '91vh' }}>
+            <div className="frontpage_main1 flex flex-col w-auto items-center h-screen" style={{ padding: '1%' }}>
                 <div className="frontpape_part1 w-full h-full">
                     <div className="title flex justify-center" style={{ marginTop: '1%' }}>
                         <div className="t1 text-7xl font-bold">

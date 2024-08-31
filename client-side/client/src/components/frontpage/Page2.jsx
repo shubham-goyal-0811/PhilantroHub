@@ -1,7 +1,7 @@
 export default function Page2() {
     return (
         <>
-            <div className="frontpage_main2 flex flex-col w-auto items-center" style={{ marginTop: '1%', padding: '1%', height: '96vh' }}>
+            <div className="frontpage_main2 flex flex-col w-auto items-center" style={{ marginTop: '1%', padding: '1%', height: 'full' }}>
                 <div className="frontpage_part2 w-full">
                     <div className="questionNGO? flex justify-center" style={{ padding: '1%' }}>
                         <div className="NGO? text-4xl font-bold">
