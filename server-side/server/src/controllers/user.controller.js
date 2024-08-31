@@ -47,10 +47,10 @@ const registerUser = asyncHandler(async (req,res) =>{
     }
 
     const existUser = await User.findOne({
-        $or:[{username} , {email}]
+        $or:[{username} , {email}, {mobileNo}]
     });
     if(existUser){
-        throw new ApiError(409,"User with this email or Username already exists");
+        throw new ApiError(409,"User with this email or Username or Mobile Number already exists");
     }
 
     const idProofLocalPath = req.files?.idProof[0].path;
