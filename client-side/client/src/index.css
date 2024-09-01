@@ -7,17 +7,15 @@
     --var1: #b5ab87;
     --var2: #fcf9f0;
     --var3: #f2944b;
+    --var4: #cfd4c8;
+    --var5: #e5ddc1;
+    --var6: #4b4737;
 }
 
 html,
 body {
     height: 100%;
 }
-
-.main1 {
-    background-color: var(--var2);
-}
-
 /* .frontpage_main1,
 .frontpage_main2,
 .frontpage_main3,
@@ -28,6 +26,27 @@ body {
 .tbl2 {
     border: 1px solid red;
 } */
+.frontpage_main1{
+    background-color: var(--var2);
+}
+
+.frontpage_main2{
+    background-color: var(--var4);
+    margin-top: 1%;
+    height: 100%;
+}
+
+.frontpage_main3{
+    background-color: var(--var5);
+    margin-top: 1%;
+    height: 100%;
+}
+
+.frontpage_main4{
+    background-color: var(--var2);
+    margin-top: 1%;
+    height: 100%;
+}
 
 .header_nav {
     backdrop-filter: blur(10px);
@@ -78,16 +97,6 @@ ul li a:hover {
     transform: scale(1.2);
 }
 
-.frontpage_main2 {
-    margin-top: 1%;
-    height: 100%;
-}
-
-.frontpage_main3 {
-    margin-top: 1%;
-    height: 100%;
-}
-
 .questionNGO {
     padding: 1%;
 }
@@ -117,9 +126,12 @@ ul li a:hover {
 
 .whatis .ans {
     border-radius: 6% 94% 9% 91% / 86% 12% 88% 14%;
-    border-color: var(--var1);
+    border-color: var(--var6);
 }
-
+.desc{
+    border-radius: 6% 94% 9% 91% / 86% 12% 88% 14%;
+    border-color: var(--var6);
+}
 .benefitstbl{
     border-radius: 0% 100% 100% 0% / 10% 7% 7% 10%;
     border-color: var(--var1);
