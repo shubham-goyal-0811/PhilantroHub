@@ -56,9 +56,9 @@ export default function Page4() {
                                     <img src={Madan} alt="" />
                                 </div>
                                 <div className="memdesc4 absolute text-3xl text-center w-80 h-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <h1>Hey, I am Shristi Madan Working on Data gathering for making of the PhilantroHub</h1>
+                                    <h1>Hey, I am Srishti Madaan Working on Data gathering for making of the PhilantroHub</h1>
                                 </div>
-                                <h1 className="text-2xl" style={{ padding: '1%' }}>Shristi Madan</h1>
+                                <h1 className="text-2xl" style={{ padding: '1%' }}>Srishti Madaan</h1>
                             </div>
 
                             <div className="Siddham flex flex-col items-center bg-slate-100 rounded-3xl relative group">

@@ -59,7 +59,7 @@ export default function Page3() {
                             </div>
                             <div className="reviews w-6/12 flex flex-col text-right">
                                 <div className="text-2xl font-bold flex justify-center">
-                                    <h1>Donor's Appriciations</h1>
+                                    <h1>Donor's Appreciations</h1>
                                 </div>
                                 <ul className="revitbl border-4">
                                     {reviews.map((review, index) => (
