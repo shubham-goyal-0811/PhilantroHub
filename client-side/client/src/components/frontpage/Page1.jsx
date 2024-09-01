@@ -42,7 +42,7 @@ export default function Page1() {
             <div className="frontpage_main1 flex flex-col w-auto items-center h-screen" style={{ padding: '1%', height: '92vh' }}>
                 <div className="frontpape_part1 flex flex-col w-full h-full justify-between">
 
-                    <div className="title flex justify-center" style={{ marginTop: '1%' }}>
+                    <div className="title flex justify-center" style={{ marginTop: '1.1%' }}>
                         <div className="t1 text-7xl font-bold">
                             <span className="inline-block">P</span><span className="inline-block">H</span><span className="inline-block">I</span><span className="inline-block">L</span><span className="inline-block">A</span><span className="inline-block">N</span><span className="inline-block">T</span><span className="inline-block">R</span><span className="inline-block">O</span>
                         </div>

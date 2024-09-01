@@ -12,7 +12,7 @@ export default function Page2() {
                         <div className="whatisngo text-2xl font-semibold">
                             <h1>What are NGOs?</h1>
                         </div>
-                        <div className="ans flex justify-center text-center w-6/12 text-xl border-4">
+                        <div className="ans flex justify-center text-center w-6/12 text-xl border-3">
                             <h2>A Non-Governmental Organization (NGO) is an independent, non-profit group dedicated to addressing social, environmental, and humanitarian issues. They work outside government control, advocating for causes like human rights, education, and health. NGOs empower communities, provide services, and influence policies to create positive social change.</h2>
                         </div>
                         <div className="types_whatis">
