@@ -13,15 +13,7 @@ export default function Header() {
               </a>
             </div>
 
-            <div className="flex w-auto items-center lg:order-2 whitespace-nowrap">
-              <div className="login w-auto">
-                <a href="/" className="text-gray-800 p-2 font-medium rounded-lg text-md">
-                  Log in
-                </a>
-              </div>
-            </div>
-
-            <div className="flex w-2/12 items-center">
+            <div className="options flex w-2/12 items-center">
               <div className="flex justify-evenly">
                 <ul className="flex font-medium justify-evenly items-center">
                   <li>
@@ -40,6 +32,14 @@ export default function Header() {
                     </div>
                   </li>
                 </ul>
+              </div>
+            </div>
+
+            <div className="flex w-auto items-center whitespace-nowrap">
+              <div className="login w-auto">
+                <a href="/" className="text-gray-800 p-2 font-medium rounded-lg text-md">
+                  Log in
+                </a>
               </div>
             </div>
 
