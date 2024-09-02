@@ -72,11 +72,11 @@ body {
     transform: scale(1.2);
 }
 
-.login a {
+.login {
     transition: 0.3s ease-in-out;
 }
 
-.login:hover a {
+.login:hover {
     background-color: white;
 }
 
