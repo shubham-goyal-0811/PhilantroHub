@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 import Logo from '../img/Logo.png';
 import Search from '../img/search.png';
-import Itachi from '../img/itachi.jpg';
-import axios from 'axios';
 
 export default function Header() {
   const navigate = useNavigate();
   const { isAuthenticated, logout, username } = useAuth();
   const [dropdownVisible, setDropdownVisible] = useState(false);
+
   const handleLogout = () => {
     logout();
   };
@@ -18,18 +17,10 @@ export default function Header() {
     setDropdownVisible(!dropdownVisible);
   };
 
-  useEffect(()=>{
-    axios.get("/api/v1/users/current-user")
-    .then((res)=>{
-      const data = JSON.stringify(res.fullName);
-      console.log(data);
-      setFullName(res.fullName);
-      console.log("hogya");
-    })
-    .catch(()=>{
-      console.log("nhh")
-    })
-  })
+  const getInitials = (name) => {
+    const names = name.split(' ');
+    return names.map(n => n[0]).join('').toUpperCase();
+  };
 
   return (
     <header className="w-full">
@@ -69,13 +60,18 @@ export default function Header() {
             ) : (
               <div className="user w-full flex rounded-lg justify-center">
                 <div className="userinfo flex flex-col items-center relative">
-                  <div className="userImg w-full flex justify-center" onClick={toggleDropdown}>
-                    <img className="w-20 h-16 rounded-full cursor-pointer" src={Itachi} alt="" />
+                  <button>
+                  <div className="userImg w-full flex justify-center items-center bg-gray-400 text-white rounded-full hover:bg-gray-700 duration-200" style={{ width: '4rem', height: '4rem', lineHeight: '4rem', textAlign: 'center', fontSize: '1.5rem' }} onClick={toggleDropdown}>
+                  {getInitials(username)}
                   </div>
+                  </button>
                   {dropdownVisible && (
                     <div className="absolute top-20 right-0 bg-white shadow-lg rounded-lg p-4 z-10">
+                      <div className="text-center mb-2">Welcome, {username}</div>
                       <div className="logout flex justify-center items-center">
-                        <button className="bg-slate-300 p-1 rounded-xl whitespace-nowrap hover:bg-slate-600 hover:text-white duration-500" onClick={handleLogout}>
+                        <button
+                          className="bg-slate-300 p-1 rounded-xl whitespace-nowrap hover:bg-slate-600 hover:text-white duration-500"
+                          onClick={handleLogout}>
                           Log out
                         </button>
                       </div>
