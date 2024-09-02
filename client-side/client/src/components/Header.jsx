@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 import Logo from '../img/Logo.png';
 import Search from '../img/search.png';
-
+import Itachi from '../img/itachi.jpg';
 export default function Header() {
   const navigate = useNavigate();
   const { isAuthenticated, logout } = useAuth();
@@ -44,16 +44,16 @@ export default function Header() {
             </div>
           </div>
 
-          <div className="flex w-auto items-center whitespace-nowrap">
+          <div className="flex items-center whitespace-nowrap">
             {!isAuthenticated ? (
               <div className="login w-auto rounded-lg" style={{ padding: '10%' }}>
                 <button onClick={() => navigate('./Login')}>Log in</button>
               </div>
             ) : (
-              <div className="user flex w-auto rounded-lg" style={{ margin: '10%' }}>
+              <div className="user flex rounded-lg" style={{ margin: '10%' }}>
                 <div className="userinfo flex flex-col">
-                  <div className="userImg">
-
+                  <div className="userImg w-2/12">
+                    <img className="w-full" src={Itachi} alt="" />
                   </div>
                   <div className="userName">
                     <h1>Hello</h1>
