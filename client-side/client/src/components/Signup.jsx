@@ -52,6 +52,7 @@ export default function Signup() {
         formDataToSend.append('username', username);
         formDataToSend.append('email', email);
         formDataToSend.append('password', password);
+        formDataToSend.append('confirmpassword', confirmpassword);
         if (idProof) {
             formDataToSend.append('idProof', idProof);
         }
