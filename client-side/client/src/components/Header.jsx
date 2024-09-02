@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 import Logo from '../img/Logo.png';
 import Search from '../img/search.png';
 import Itachi from '../img/itachi.jpg';
+import axios from 'axios';
 
 export default function Header() {
   const navigate = useNavigate();
   const { isAuthenticated, logout } = useAuth();
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [fullName,setFullName] = useState("");
   const handleLogout = () => {
     logout();
   };
@@ -16,6 +18,19 @@ export default function Header() {
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
   };
+
+  useEffect(()=>{
+    axios.get("/api/v1/users/current-user")
+    .then((res)=>{
+      const data = JSON.stringify(res.fullName);
+      console.log(data);
+      setFullName(res.fullName);
+      console.log("hogya");
+    })
+    .catch(()=>{
+      console.log("nhh")
+    })
+  })
 
   return (
     <header className="w-full">
@@ -60,6 +75,9 @@ export default function Header() {
                   </div>
                   {dropdownVisible && (
                     <div className="absolute top-20 right-0 bg-white shadow-lg rounded-lg p-4 z-10">
+                      <div className="flex justify-center items-center">
+                        <h1>{fullName}</h1>
+                      </div>
                       <div className="logout flex justify-center items-center">
                         <button className="bg-slate-300 p-1 rounded-xl whitespace-nowrap hover:bg-slate-600 hover:text-white duration-500" onClick={handleLogout}>
                           Log out
