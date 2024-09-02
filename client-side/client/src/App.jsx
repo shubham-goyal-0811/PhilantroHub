@@ -10,8 +10,7 @@ function App() {
       <Routes>
         //frontpage and header
         <Route
-          path="/"
-          element={<>
+          path="/" element={<>
           <Header />
           <Frontpage />
           </>}/>
