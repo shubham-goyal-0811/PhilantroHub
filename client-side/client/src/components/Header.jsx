@@ -9,7 +9,6 @@ export default function Header() {
   const navigate = useNavigate();
   const { isAuthenticated, logout } = useAuth();
   const [dropdownVisible, setDropdownVisible] = useState(false);
-
   const handleLogout = () => {
     logout();
   };
