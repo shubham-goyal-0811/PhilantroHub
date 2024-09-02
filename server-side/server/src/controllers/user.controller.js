@@ -25,15 +25,19 @@ const generateAccessandRfreshToken = async (userId)=>{
 
 
 const registerUser = asyncHandler(async (req,res) =>{
-    const {fullName,email,username,password,mobileNo} = req.body;
+    const {fullName,email,username,confirmpassword,password,mobileNo} = req.body;
     if(
-        [fullName,email,username,password].some((field)=>{
+        [fullName,email,username,password,confirmpassword].some((field)=>{
              field?.trim() === ""
         })
         // we can use map too
     )
     {
         throw new ApiError(400,"All Fields are required");
+    }
+
+    if(confirmpassword !== password){
+        throw new ApiError(400,"Password and confirm password should match");
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -92,6 +96,7 @@ const registerUser = asyncHandler(async (req,res) =>{
         throw new ApiError(500,"Something went wrong while registring the user");
     }
 
+    console.log("registration done");
     return res.status(201).json(
         new ApiResponse(201,userCreated,"user Created succesfully")
     )
