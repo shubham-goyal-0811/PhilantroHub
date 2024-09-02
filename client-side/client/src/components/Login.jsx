@@ -25,7 +25,7 @@ export default function Login() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const { mobileNo, username, email, password } = formData;
-
+    
         if(!mobileNo && !username && !email){
             setErrors('Please fill in at least one of Mobile, Username, or Email.');
             return;
@@ -35,20 +35,20 @@ export default function Login() {
             return;
         }
         setErrors('');
-
+    
         const backendUrl = '/api/v1/users/login';
-
+    
         axios.post(backendUrl, formData)
             .then(response => {
                 console.log('Success:', response.data);
-                login();
+                login({ username });
                 navigate('/');
             })
             .catch(error => {
                 console.error('Error:', error);
-                setErrors('An error occurred. Please try again.');
+                setErrors('An error occurred. Please try again. Maybe check username or password');
             });
-    };
+    };    
 
     return (
         <div className="login-container flex justify-center items-center min-h-screen bg-gray-100">
@@ -57,12 +57,12 @@ export default function Login() {
                 {errors && <p className="text-red-500 mb-4">{errors}</p>}
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
-                        <label htmlFor="mobileNo" className="block text-gray-700">Mobile</label>
-                        <input type="text" id="mobileNo" name="mobileNo" value={formData.mobileNo} onChange={handleChange} className="mt-1 block w-full border-2 border-gray-900 rounded" style={{ padding: '2%' }} />
+                        <label htmlFor="username" className="block text-gray-700">Username*</label>
+                        <input type="text" id="username" name="username" value={formData.username} onChange={handleChange} className="mt-1 block w-full border-2 border-gray-900 rounded" style={{ padding: '2%' }} required/>
                     </div>
                     <div className="mb-4">
-                        <label htmlFor="username" className="block text-gray-700">Username</label>
-                        <input type="text" id="username" name="username" value={formData.username} onChange={handleChange} className="mt-1 block w-full border-2 border-gray-900 rounded" style={{ padding: '2%' }} />
+                        <label htmlFor="mobileNo" className="block text-gray-700">Mobile</label>
+                        <input type="text" id="mobileNo" name="mobileNo" value={formData.mobileNo} onChange={handleChange} className="mt-1 block w-full border-2 border-gray-900 rounded" style={{ padding: '2%' }} />
                     </div>
                     <div className="mb-4">
                         <label htmlFor="email" className="block text-gray-700">Email</label>

@@ -1,28 +1,34 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [username, setUsername] = useState('');
 
   useEffect(() => {
-    //check local storage for authentication status
     const storedAuthStatus = localStorage.getItem('isAuthenticated');
+    const storedUsername = localStorage.getItem('username');
     setIsAuthenticated(storedAuthStatus === 'true');
+    if (storedUsername) setUsername(storedUsername);
   }, []);
 
-  const login = () => {
+  const login = (user) => {
     setIsAuthenticated(true);
+    setUsername(user.username);
     localStorage.setItem('isAuthenticated', 'true');
+    localStorage.setItem('username', user.username);
   };
 
   const logout = () => {
     setIsAuthenticated(false);
+    setUsername('');
     localStorage.removeItem('isAuthenticated');
+    localStorage.removeItem('username');
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, username, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
