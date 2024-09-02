@@ -11,6 +11,13 @@
     --var5: #e5ddc1;
     --var6: #4b4737;
 }
+::-webkit-scrollbar {
+    width: 2px;
+}
+::-webkit-scrollbar-thumb {
+    background: red;
+    border-radius: 10px;
+}
 
 html,
 body {

@@ -1,16 +1,21 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext';
 import Logo from '../img/Logo.png';
 import Search from '../img/search.png';
 
 export default function Header() {
   const navigate = useNavigate();
+  const { isAuthenticated, logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+  };
 
   return (
     <header className="w-full">
       <nav className="header_nav w-full" style={{ padding: '0.5%' }}>
-        <div className="flex w-full items-center justify-between">
-
+        <div className="flex w-full items-center justify-around">
           <div className="flex logo">
             <a href="/" className="flex items-center left-0">
               <img src={Logo} className="w-16 mx-5 invert" alt="PhilantroHub Logo" />
@@ -40,11 +45,26 @@ export default function Header() {
           </div>
 
           <div className="flex w-auto items-center whitespace-nowrap">
-            <div className="login w-auto rounded-lg" style={{ padding: '10%' }}>
-              <button onClick={() => navigate('./Login')}>Log in</button>
-            </div>
-          </div>
+            {!isAuthenticated ? (
+              <div className="login w-auto rounded-lg" style={{ padding: '10%' }}>
+                <button onClick={() => navigate('./Login')}>Log in</button>
+              </div>
+            ) : (
+              <div className="user flex w-auto rounded-lg" style={{ margin: '10%' }}>
+                <div className="userinfo flex flex-col">
+                  <div className="userImg">
 
+                  </div>
+                  <div className="userName">
+                    <h1>Hello</h1>
+                  </div>
+                </div>
+                <div className="logout">
+                  <button onClick={handleLogout}>Log out</button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </nav>
     </header>

@@ -1,0 +1,122 @@
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
+export default function Signup() {
+    const [formData, setFormData] = useState({
+        fullName: '',
+        mobileNo: '',
+        username: '',
+        email: '',
+        password: '',
+        confirmpassword: '',
+        picture: null
+    });
+    const [errors, setErrors] = useState('');
+    const navigate = useNavigate();
+
+    const handleChange = (e) => {
+        const { name, value, type, files } = e.target;
+        if (type === 'file') {
+            setFormData(prevState => ({
+                ...prevState,
+                [name]: files[0]
+            }));
+        } else {
+            setFormData(prevState => ({
+                ...prevState,
+                [name]: value
+            }));
+        }
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const { mobileNo, username, email, confirmpassword, password, fullName, idProof } = formData;
+
+        if (password !== confirmpassword) {
+            setErrors('Passwords do not match');
+            return;
+        }
+        if (!password || !confirmpassword) {
+            setErrors('Please enter the password');
+            return;
+        }
+        setErrors('');
+
+        const backendUrl = '/api/v1/users/register';
+
+        const formDataToSend = new FormData();
+        formDataToSend.append('fullName', fullName);
+        formDataToSend.append('mobileNo', mobileNo);
+        formDataToSend.append('username', username);
+        formDataToSend.append('email', email);
+        formDataToSend.append('password', password);
+        if (idProof) {
+            formDataToSend.append('idProof', idProof);
+        }
+
+        try {
+            const response = await axios.post(backendUrl, formDataToSend, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            console.log('Success:', response.data);
+            navigate('/');
+        } 
+        catch(error){
+            console.error('Error:', error);
+            setErrors('An error occurred. Please try again.');
+        }
+    };
+
+    return (
+        <>
+            <div className="login-container flex justify-center items-center min-h-screen bg-gray-100">
+                <div className="login-form bg-white p-8 rounded shadow-md w-full max-w-md">
+                    <h2 className="text-2xl font-semibold mb-6">Sign Up</h2>
+                    {errors && <p className="text-red-500 mb-4">{errors}</p>}
+                    <form onSubmit={handleSubmit}>
+                        <div className="mb-4">
+                            <label htmlFor="fullName" className="block text-gray-700">Full Name</label>
+                            <input type="text" id="fullName" name="fullName" required value={formData.fullName} onChange={handleChange} className="mt-1 block w-full border-2 border-gray-900 rounded" style={{ padding: '2%' }} />
+                        </div>
+                        <div className="mb-4">
+                            <label htmlFor="mobileNo" className="block text-gray-700">Mobile Number</label>
+                            <input type="text" id="mobileNo" name="mobileNo" required value={formData.mobileNo} onChange={handleChange} className="mt-1 block w-full border-2 border-gray-900 rounded" style={{ padding: '2%' }} />
+                        </div>
+                        <div className="mb-4">
+                            <label htmlFor="username" className="block text-gray-700">Username</label>
+                            <input type="text" id="username" name="username" required value={formData.username} onChange={handleChange} className="mt-1 block w-full border-2 border-gray-900 rounded" style={{ padding: '2%' }} />
+                        </div>
+                        <div className="mb-4">
+                            <label htmlFor="email" className="block text-gray-700">Email</label>
+                            <input type="email" id="email" name="email" required value={formData.email} onChange={handleChange} className="mt-1 block w-full border-2 border-gray-900 rounded" style={{ padding: '2%' }} />
+                        </div>
+                        <div className="mb-4">
+                            <label htmlFor="password" className="block text-gray-700">Password</label>
+                            <input type="password" id="password" name="password" value={formData.password} required minLength="4" maxLength="20" onChange={handleChange} className="mt-1 block w-full border-2 border-gray-900 rounded" style={{ padding: '2%' }} />
+                        </div>
+                        <div className="mb-4">
+                            <label htmlFor="confirmpassword" className="block text-gray-700">Confirm Password</label>
+                            <input type="password" id="confirmpassword" name="confirmpassword" value={formData.confirmpassword} required minLength="4" maxLength="20" onChange={handleChange} className="mt-1 block w-full border-2 border-gray-900 rounded" style={{ padding: '2%' }} />
+                        </div>
+                        <div className="mb-4">
+                            <label htmlFor="picture" className="block text-gray-700">Upload id Proof</label>
+                            <input type="file" id="idProof" name="idProof" onChange={handleChange} className="mt-1 block w-full border-2 border-gray-900 rounded" />
+                        </div>
+                        <div className="flex">
+                            <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-300 duration-500" style={{ margin: '1%' }}>
+                                Submit
+                            </button>
+                            <button type="button" className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-300 duration-500" onClick={() => navigate('./Login')} style={{ margin: '1%' }}>
+                                Already Exists?
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </>
+    );
+}
