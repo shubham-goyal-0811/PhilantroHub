@@ -10,6 +10,7 @@
     --var4: #cfd4c8;
     --var5: #e5ddc1;
     --var6: #4b4737;
+    --var7: #f8f1dc;
 }
 ::-webkit-scrollbar {
     width: 2px;
@@ -22,6 +23,7 @@
 html,
 body {
     height: 100%;
+    background-color: var(--var2);
 }
 /* .frontpage_main1,
 .frontpage_main2,
@@ -33,12 +35,12 @@ body {
 .tbl2 {
     border: 1px solid red;
 } */
-.frontpage_main1{
+/* .frontpage_main1{
     background-color: var(--var2);
-}
+} */
 
 .frontpage_main2{
-    background-color: var(--var4);
+    background-color: var(--var7);
     margin-top: 1%;
     height: 100%;
 }

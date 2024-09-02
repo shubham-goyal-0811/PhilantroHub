@@ -33,7 +33,6 @@ export default function Page1() {
         const interval = setInterval(() => {
             setCurrentQuoteIndex((prevIndex) => (prevIndex + 1) % qts.length);
         }, 10000);
-
         return () => clearInterval(interval);
     }, [qts.length]);
 

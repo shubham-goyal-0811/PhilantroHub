@@ -22,7 +22,8 @@ export default function Signup() {
                 ...prevState,
                 [name]: files[0]
             }));
-        } else {
+        }
+         else {
             setFormData(prevState => ({
                 ...prevState,
                 [name]: value
@@ -64,10 +65,10 @@ export default function Signup() {
                 }
             });
             console.log('Success:', response.data);
-            navigate('/');
+            navigate('/Login');
         } 
-        catch(error){
-            console.error('Error:', error);
+        catch (error) {
+            console.error('Error:', error.response?.data || error.message);
             setErrors('An error occurred. Please try again.');
         }
     };
