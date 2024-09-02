@@ -22,16 +22,20 @@ export default function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const { mobile, username, email, password } = formData;
+        const { mobileNo, username, email, password } = formData;
 
-        if(!mobile && !username && !email){
+        if(!mobileNo && !username && !email){
             setErrors('Please fill in at least one of Mobile, Username, or Email.');
+            return;
+        }
+        if(!password){
+            setErrors("Please enter the password");
             return;
         }
         setErrors('');
 
         //goyal link idhr daaalio
-        const backendUrl = 'https://fake/login';
+        const backendUrl = '/api/v1/users/login';
 
         axios.post(backendUrl, formData)
             .then(response => {
@@ -52,8 +56,8 @@ export default function Login() {
                 {errors && <p className="text-red-500 mb-4">{errors}</p>}
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
-                        <label htmlFor="mobile" className="block text-gray-700">Mobile</label>
-                        <input type="text" id="mobile" name="mobile" value={formData.mobile} onChange={handleChange} className="mt-1 block w-full border-2 border-gray-900 rounded" style={{ padding: '2%' }} />
+                        <label htmlFor="mobileNo" className="block text-gray-700">Mobile</label>
+                        <input type="text" id="mobileNo" name="mobileNo" value={formData.mobileNo} onChange={handleChange} className="mt-1 block w-full border-2 border-gray-900 rounded" style={{ padding: '2%' }} />
                     </div>
                     <div className="mb-4">
                         <label htmlFor="username" className="block text-gray-700">Username</label>
