@@ -6,10 +6,10 @@ export default function Frontpage() {
     return (
         <>
             <div className="main1 flex flex-col">
-                <div className=""><Page1/></div>
-                <div className=""><Page2/></div>
-                <div className=""><Page3/></div>
-                <div className=""><Page4/></div>
+                <div className="page1"><Page1/></div>
+                <div className="page2"><Page2/></div>
+                <div className="page3"><Page3/></div>
+                <div className="page4"><Page4/></div>
             </div>
         </>
     );

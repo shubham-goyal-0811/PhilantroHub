@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=New+Amsterdam&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Moulpali&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,6 +12,7 @@
     --var5: #e5ddc1;
     --var6: #4b4737;
     --var7: #f8f1dc;
+    --var8: #fcf0ca;
 }
 ::-webkit-scrollbar {
     width: 2px;
@@ -23,36 +25,26 @@
 html,
 body {
     height: 100%;
-    background-color: var(--var2);
 }
-/* .frontpage_main1,
-.frontpage_main2,
-.frontpage_main3,
-.frontpape_part3,
-.frontpape_part1,
-.frontpape_part2,
-.tbl,
-.tbl2 {
-    border: 1px solid red;
-} */
-/* .frontpage_main1{
-    background-color: var(--var2);
-} */
-
-.frontpage_main2{
+.page2{
     background-color: var(--var7);
+    font-family: "Moulpali"
+}
+.page3{
+    background-color: var(--var8);
+    font-family: "Moulpali"
+}
+.frontpage_main2{
     margin-top: 1%;
     height: 100%;
 }
 
 .frontpage_main3{
-    background-color: var(--var5);
     margin-top: 1%;
     height: 100%;
 }
 
 .frontpage_main4{
-    /* background-color: var(--var2); */
     margin-top: 1%;
     height: 100%;
 }

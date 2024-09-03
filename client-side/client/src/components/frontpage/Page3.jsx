@@ -161,20 +161,20 @@ export default function Page3() {
             <div className="frontpage_main3 flex flex-col w-auto items-center">
                 <div className="frontpage_part3 w-full">
                     <div className="questionPhilantro flex justify-center">
-                        <div className="philantro text-4xl font-bold">
+                        <div className="philantro text-6xl font-bold">
                             <h1>Philantro Hub?</h1>
                         </div>
                     </div>
                     <div className="whatis flex flex-col items-center">
-                        <div className="whatisphilantro text-2xl font-semibold">
+                        <div className="whatisphilantro text-4xl font-semibold">
                             <h1>What are we?</h1>
                         </div>
-                        <div className="desc flex justify-center text-center w-6/12 text-xl border-4">
+                        <div className="desc flex justify-center text-center w-6/12 text-2xl border-4">
                             <h2>PhilanthroHub is an innovative platform designed to bridge the gap between compassionate donors and impactful NGOs around the world. Our mission is to simplify the process of finding and supporting non-profit organizations by providing a comprehensive directory of NGO contacts.</h2>
                         </div>
                         <div className="tbl2 flex flex-col w-full justify-between">
                             <div className="flex flex-col text-left benefits w-full h-full">
-                                <div className="benefitsheading text-4xl font-bold flex justify-center">
+                                <div className="benefitsheading text-6xl font-bold flex justify-center">
                                     <h1>Benefits</h1>
                                 </div>
                                 <ul className="benefitstbl2 relative">
@@ -198,38 +198,38 @@ export default function Page3() {
                                     </li>
                                     <li className="flex w-full" style={{ padding: '2%' }}>
                                         <div className="leftdiv01 flex flex-col items-start w-6/12">
-                                            <h1 className="font-bold text-xl">Comprehensive Directory:</h1>
-                                            <p>Access to a vast and well-organized directory of NGOs from around the world, making it easier to find organizations that align with your values and interests.</p>
+                                            <h1 className="font-bold text-4xl">Comprehensive Directory:</h1>
+                                            <p className="text-2xl">Access to a vast and well-organized directory of NGOs from around the world, making it easier to find organizations that align with your values and interests.</p>
                                         </div>
                                     </li>
                                     <li className="flex w-full" style={{ padding: '2%' }}>
                                         <div className="leftdiv02 flex flex-col items-start w-6/12">
-                                            <h1 className="font-bold text-xl">Simplified Donation Process:</h1>
-                                            <p>Streamlined tools and resources to make the donation process quick, easy, and secure, ensuring that your contributions reach the intended causes efficiently.</p>
+                                            <h1 className="font-bold text-4xl">Simplified Donation Process:</h1>
+                                            <p className="text-2xl">Streamlined tools and resources to make the donation process quick, easy, and secure, ensuring that your contributions reach the intended causes efficiently.</p>
                                         </div>
                                     </li>
                                     <li className="flex w-full" style={{ padding: '2%' }}>
                                         <div className="leftdiv03 flex flex-col items-start w-6/12">
-                                            <h1 className="font-bold text-xl">Verified NGOs:</h1>
-                                            <p>PhilanthroHub features vetted and credible NGOs, giving you peace of mind that your donations are going to legitimate and impactful organizations.</p>
+                                            <h1 className="font-bold text-4xl">Verified NGOs:</h1>
+                                            <p className="text-2xl">PhilanthroHub features vetted and credible NGOs, giving you peace of mind that your donations are going to legitimate and impactful organizations.</p>
                                         </div>
                                     </li>
                                     <li className="flex w-full" style={{ padding: '2%' }}>
                                         <div className="leftdiv4 flex flex-col items-start w-6/12">
-                                            <h1 className="font-bold text-xl">User-Friendly Interface:</h1>
-                                            <p>Contributing to causes you care about can provide a sense of satisfaction and purpose.</p>
+                                            <h1 className="font-bold text-4xl">User-Friendly Interface:</h1>
+                                            <p className="text-2xl">Contributing to causes you care about can provide a sense of satisfaction and purpose.</p>
                                         </div>
                                     </li>
                                     <li className="flex w-full" style={{ padding: '2%' }}>
                                         <div className="leftdiv5 flex flex-col items-start w-6/12">
-                                            <h1 className="font-bold text-xl">Tax Benefits:</h1>
-                                            <p>Designed with ease of use in mind, PhilanthroHub’s intuitive interface ensures a smooth and enjoyable experience for donors of all ages and tech-savviness levels.</p>
+                                            <h1 className="font-bold text-4xl">Tax Benefits:</h1>
+                                            <p className="text-2xl">Designed with ease of use in mind, PhilanthroHub’s intuitive interface ensures a smooth and enjoyable experience for donors of all ages and tech-savviness levels.</p>
                                         </div>
                                     </li>
                                 </ul>
                             </div>
                             <div className="reviews w-full h-full flex flex-col text-right">
-                                <div className="donorheading text-4xl font-bold flex justify-center">
+                                <div className="donorheading text-6xl font-bold flex justify-center">
                                     <h1>Donor's Appreciations</h1>
                                 </div>
                                 <ul className="revitbl relative">
@@ -252,8 +252,8 @@ export default function Page3() {
                                     {reviews.map((review, index) => (
                                         <li className={`review-item flex w-full justify-end ${index % 2 === 0 ? 'odd' : 'even'}`} style={{ padding: '2%' }} key={index}>
                                             <div className="flex flex-col justify-end w-7/12">
-                                                <h1 className="font-bold text-xl">{review.name}</h1>
-                                                <p>{review.review}</p>
+                                                <h1 className="font-bold text-4xl">{review.name}</h1>
+                                                <p className='text-2xl'>{review.review}</p>
                                             </div>
                                         </li>
                                     ))}
