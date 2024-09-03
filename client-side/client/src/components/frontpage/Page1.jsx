@@ -52,7 +52,7 @@ export default function Page1() {
 
                     <div className="front_content flex items-center justify-evenly w-full h-full">
                         <div className="picture w-2/5">
-                            <div className="act_pic">
+                            <div className="act_pic flex justify-center">
                                 <img src={Img1} alt="" className="rounded-full" />
                             </div>
                         </div>
