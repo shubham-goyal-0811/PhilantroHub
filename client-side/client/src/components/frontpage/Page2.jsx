@@ -179,14 +179,14 @@ export default function Page2() {
 
     return (
         <>
-            <div className="frontpage_main2 flex flex-col w-auto items-center">
-                <div className="frontpage_part2 w-full">
+            <div className="frontpage_main2 h-full flex flex-col w-auto items-center">
+                <div className="frontpage_part2 w-full h-full">
                     <div className="questionNGO flex justify-center">
                         <div className="NGO? text-6xl font-bold">
                             <h1>NGO?</h1>
                         </div>
                     </div>
-                    <div className="whatis flex flex-col items-center">
+                    <div className="whatis flex flex-col h-full items-center">
                         <div className="whatisngo text-4xl font-semibold">
                             <h1>What are NGOs?</h1>
                         </div>
@@ -196,14 +196,14 @@ export default function Page2() {
                         <div className="types_whatis">
                             <a href=""><h2>Know the Types of NGOs</h2></a>
                         </div>
-                        <div className="tbl flex flex-col w-full items-center">
-                            <div className="flex flex-col benefits w-full h-full">
+                        <div className="tbl flex flex-col w-full h-full items-center">
+                            <div className="flex flex-col benefits w-full h-auto">
                                 <div className="text-6xl font-bold flex justify-center">
                                     <h1>Benefits</h1>
                                 </div>
-                                <ul className="flex flex-col space-y-4 items-center">
+                                <ul className="flex flex-col items-center">
                                     <li className="flex w-full justify-center" style={{ padding: '2%' }}>
-                                        <svg width="20" height="900" xmlns="http://www.w3.org/2000/svg" className="absolute">
+                                        <svg width="20" height="900" xmlns="http://www.w3.org/2000/svg" className="svg001 absolute">
                                             <path d="
                                                     M 0 0
                                                     L 15 20
