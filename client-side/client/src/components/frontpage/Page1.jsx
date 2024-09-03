@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import itachi from '../../img/itachi.jpg';
+import Img1 from '../../img/NGOSITE_img1.png';
 export default function Page1() {
     const qts = [
         {
@@ -53,7 +53,7 @@ export default function Page1() {
                     <div className="front_content flex items-center justify-evenly w-full h-full">
                         <div className="picture w-2/5">
                             <div className="act_pic">
-                                <img src={itachi} alt="" className="rounded-full" />
+                                <img src={Img1} alt="" className="rounded-full" />
                             </div>
                         </div>
                         <div className="quotes w-2/5 flex items-center text-center justify-center" style={{ margin: '1%', padding: '1%' }}>
