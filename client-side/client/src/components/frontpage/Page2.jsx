@@ -5,8 +5,6 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Page2() {
-    const svgLine1Ref = useRef(null);
-    const svgLine2Ref = useRef(null);
     useEffect(() => {
         const svgLine = document.querySelector('svg path');
 
@@ -23,6 +21,28 @@ export default function Page2() {
                 }
             }
         );
+
+        const svgPaths = document.querySelectorAll('.svg2 path, .svg3 path');
+
+        svgPaths.forEach(svgLine => {
+            gsap.fromTo(svgLine,
+                {
+                    strokeDasharray: svgLine.getTotalLength(),
+                    strokeDashoffset: svgLine.getTotalLength()
+                },
+                {
+                    strokeDashoffset: 0,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: svgLine,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: 1
+                    }
+                }
+            );
+        });
+
 
         gsap.fromTo(".leftdiv1", {
             x: 100,
@@ -89,6 +109,72 @@ export default function Page2() {
                 scrub: true,
             }
         });
+
+        // gsap.fromTo(".leftli1", {
+        //     x: 100,
+        //     opacity: 0
+        // }, {
+        //     x: 0,
+        //     opacity: 1,
+        //     scrollTrigger: {
+        //         trigger: ".leftli1",
+        //         start: "top bottom",
+        //         end: "bottom top",
+        //         scrub: true,
+        //     }
+        // });
+        // gsap.fromTo(".leftli2", {
+        //     x: 100,
+        //     opacity: 0
+        // }, {
+        //     x: 0,
+        //     opacity: 1,
+        //     scrollTrigger: {
+        //         trigger: ".leftli2",
+        //         start: "top bottom",
+        //         end: "bottom top",
+        //         scrub: true,
+        //     }
+        // });
+        // gsap.fromTo(".leftli3", {
+        //     x: 100,
+        //     opacity: 0
+        // }, {
+        //     x: 0,
+        //     opacity: 1,
+        //     scrollTrigger: {
+        //         trigger: ".leftli3",
+        //         start: "top bottom",
+        //         end: "bottom top",
+        //         scrub: true,
+        //     }
+        // });
+        // gsap.fromTo(".rightli1", {
+        //     x: -100,
+        //     opacity: 0
+        // }, {
+        //     x: 0,
+        //     opacity: 1,
+        //     scrollTrigger: {
+        //         trigger: ".rightli1",
+        //         start: "top bottom",
+        //         end: "bottom top",
+        //         scrub: true,
+        //     }
+        // });
+        // gsap.fromTo(".rightli2", {
+        //     x: -100,
+        //     opacity: 0
+        // }, {
+        //     x: 0,
+        //     opacity: 1,
+        //     scrollTrigger: {
+        //         trigger: ".rightli2",
+        //         start: "top bottom",
+        //         end: "bottom top",
+        //         scrub: true,
+        //     }
+        // });
     }, []);
 
     return (
@@ -201,48 +287,47 @@ export default function Page2() {
                             </div>
 
                             <div className="howtopoints flex flex-col w-full h-full">
-                                <div className="text-2xl font-bold flex justify-center">
+                                <div className="text-4xl flex flex-col items-center font-bold flex justify-center">
                                     <h1>How to Donate?</h1>
+                                    <p className="text-xl">comming soon</p>
                                 </div>
                                 <ul className="flex flex-col space-y-4 items-center">
-                                    <li className="flex w-full justify-start" style={{ padding: '2%' }}>
-                                        <svg width="20" height="3000" xmlns="http://www.w3.org/2000/svg" className="absolute">
+                                    {/* <li className="flex w-full justify-start" style={{ padding: '2%' }}>
+                                        <svg width="20" height="3000" xmlns="http://www.w3.org/2000/svg" className="svg2 absolute">
                                             <path d="
-        M 10 0
-        Q 0 50, 10 100
-        T 10 200
-        Q 0 250, 10 300
-        T 10 400
-        Q 0 450, 10 500
-        T 10 600
-        Q 0 650, 10 700
-        T 10 800
-        Q 0 850, 10 900
-        T 10 1000
-        Q 0 1050, 10 1100
-    " fill="none" stroke="black" strokeWidth="2" />
+                                                    M 10 0
+                                                    Q 0 50, 10 100
+                                                    T 10 200
+                                                    Q 0 250, 10 300
+                                                    T 10 400
+                                                    Q 0 450, 10 500
+                                                    T 10 600
+                                                    Q 0 650, 10 700
+                                                    T 10 800
+                                                    Q 0 850, 10 900
+                                                    T 10 1000
+                                                    Q 0 1050, 10 1100
+                                                " fill="none" stroke="black" strokeWidth="2" />
                                         </svg>
-
                                     </li>
                                     <li className="flex w-full justify-end" style={{ padding: '2%' }}>
-                                        <svg width="20" height="1000" xmlns="http://www.w3.org/2000/svg" className="absolute">
+                                        <svg width="20" height="1000" xmlns="http://www.w3.org/2000/svg" className="svg3 absolute">
                                             <path d="
-        M 10 0
-        Q 0 50, 10 100
-        T 10 200
-        Q 0 250, 10 300
-        T 10 400
-        Q 0 450, 10 500
-        T 10 600
-        Q 0 650, 10 700
-        T 10 800
-        Q 0 850, 10 900
-        T 10 1000
-    " fill="none" stroke="black" strokeWidth="2" />
+                                                    M 10 0
+                                                    Q 0 50, 10 100
+                                                    T 10 200
+                                                    Q 0 250, 10 300
+                                                    T 10 400
+                                                    Q 0 450, 10 500
+                                                    T 10 600
+                                                    Q 0 650, 10 700
+                                                    T 10 800
+                                                    Q 0 850, 10 900
+                                                    T 10 1000
+                                                " fill="none" stroke="black" strokeWidth="2" />
                                         </svg>
-
-                                    </li>
-                                    <li className="flex w-full justify-start" style={{ padding: '2%' }}>
+                                    </li> */}
+                                    {/* <li className="flex w-full justify-start" style={{ padding: '2%' }}>
                                         <div className="leftli1 flex flex-col items-start w-5/12" style={{ margin: '1%' }}>
                                             <h1 className="font-bold text-xl">Support for Important Causes:</h1>
                                             <p>Your contributions can help fund essential programs and services, such as education, healthcare, and environmental conservation.</p>
@@ -271,7 +356,7 @@ export default function Page2() {
                                             <h1 className="font-bold text-xl">Tax Benefits:</h1>
                                             <p>In many countries, donations to registered charities or NGOs are tax-deductible.</p>
                                         </div>
-                                    </li>
+                                    </li> */}
                                 </ul>
                             </div>
                         </div>

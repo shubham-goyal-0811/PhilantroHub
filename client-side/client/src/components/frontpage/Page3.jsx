@@ -1,4 +1,147 @@
+import { useEffect } from 'react';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
 export default function Page3() {
+
+    useEffect(() => {
+        const svgPaths = document.querySelectorAll('.svg1 path');
+
+        svgPaths.forEach(svgLine => {
+            gsap.fromTo(svgLine,
+                {
+                    strokeDasharray: svgLine.getTotalLength(),
+                    strokeDashoffset: svgLine.getTotalLength()
+                },
+                {
+                    strokeDashoffset: 0,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: '.benefitsheading',
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: 1
+                    }
+                }
+            );
+        });
+
+        const svgPaths2 = document.querySelectorAll('.svg2 path');
+
+        svgPaths2.forEach(svgLine => {
+            gsap.fromTo(svgLine,
+                {
+                    strokeDasharray: svgLine.getTotalLength(),
+                    strokeDashoffset: svgLine.getTotalLength()
+                },
+                {
+                    strokeDashoffset: 0,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: '.donorheading',
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: 1
+                    }
+                }
+            );
+        });
+        console.log(document.querySelectorAll('.leftdiv1'));
+        gsap.fromTo(".leftdiv01", {
+            x: 100,
+            opacity: 0
+        }, {
+            x: 0,
+            opacity: 1,
+            scrollTrigger: {
+                trigger: ".leftdiv01",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+            }
+        });
+        gsap.fromTo(".leftdiv02", {
+            x: 100,
+            opacity: 0
+        }, {
+            x: 0,
+            opacity: 1,
+            scrollTrigger: {
+                trigger: ".leftdiv02",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+            }
+        });
+        gsap.fromTo(".leftdiv03", {
+            x: 100,
+            opacity: 0
+        }, {
+            x: 0,
+            opacity: 1,
+            scrollTrigger: {
+                trigger: ".leftdiv03",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+            }
+        });
+        gsap.fromTo(".leftdiv4", {
+            x: 100,
+            opacity: 0
+        }, {
+            x: 0,
+            opacity: 1,
+            scrollTrigger: {
+                trigger: ".leftdiv4",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+            }
+        });
+        gsap.fromTo(".leftdiv5", {
+            x: 100,
+            opacity: 0
+        }, {
+            x: 0,
+            opacity: 1,
+            scrollTrigger: {
+                trigger: ".leftdiv5",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+            }
+        });
+        gsap.fromTo(".odd", {
+            x: -100,
+            opacity: 0
+        }, {
+            x: 0,
+            opacity: 1,
+            scrollTrigger: {
+                trigger: ".odd",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+            }
+        });
+        gsap.fromTo(".even", {
+            x: -100,
+            opacity: 0
+        }, {
+            x: 0,
+            opacity: 1,
+            scrollTrigger: {
+                trigger: ".even",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+            }
+        });
+    }, []);
+
     const reviews = [
         {
             name: "Mr. Shwetank Dohroo",
@@ -29,43 +172,89 @@ export default function Page3() {
                         <div className="desc flex justify-center text-center w-6/12 text-xl border-4">
                             <h2>PhilanthroHub is an innovative platform designed to bridge the gap between compassionate donors and impactful NGOs around the world. Our mission is to simplify the process of finding and supporting non-profit organizations by providing a comprehensive directory of NGO contacts.</h2>
                         </div>
-                        <div className="tbl2 flex w-full justify-between">
-                            <div className="flex flex-col text-left benefits w-6/12 h-full">
-                                <div className="text-2xl font-bold flex justify-center">
+                        <div className="tbl2 flex flex-col w-full justify-between">
+                            <div className="flex flex-col text-left benefits w-full h-full">
+                                <div className="benefitsheading text-4xl font-bold flex justify-center">
                                     <h1>Benefits</h1>
                                 </div>
-                                <ul className="benefitstbl2 border-4">
-                                    <li>
-                                        <h1 className="font-bold text-xl">Comprehensive Directory:</h1>
-                                        <p>Access to a vast and well-organized directory of NGOs from around the world, making it easier to find organizations that align with your values and interests.</p>
+                                <ul className="benefitstbl2 relative">
+                                    <li className="flex items-center w-full justify-end h-full absolute" style={{ padding: '2%' }}>
+                                        <svg width="300" height="300" xmlns="http://www.w3.org/2000/svg" className="svg1" style={{ marginRight: '10%' }}>
+                                            <path d="
+                                                    M 150 150
+                                                    C 175 125, 225 125, 250 150
+                                                    S 275 175, 250 200
+                                                    S 225 225, 200 200
+                                                    S 175 175, 200 150
+                                                    S 225 125, 250 100
+                                                    S 275 75, 250 50
+                                                    S 225 25, 200 50
+                                                    S 175 75, 150 100
+                                                    S 125 125, 100 100
+                                                    S 75 75, 50 50
+                                                    S 25 25, 50 0
+                                                    " fill="none" stroke="black" strokeWidth="2" />
+                                        </svg>
                                     </li>
-                                    <li>
-                                        <h1 className="font-bold text-xl">Simplified Donation Process:</h1>
-                                        <p>Streamlined tools and resources to make the donation process quick, easy, and secure, ensuring that your contributions reach the intended causes efficiently.</p>
+                                    <li className="flex w-full" style={{ padding: '2%' }}>
+                                        <div className="leftdiv01 flex flex-col items-start w-6/12">
+                                            <h1 className="font-bold text-xl">Comprehensive Directory:</h1>
+                                            <p>Access to a vast and well-organized directory of NGOs from around the world, making it easier to find organizations that align with your values and interests.</p>
+                                        </div>
                                     </li>
-                                    <li>
-                                        <h1 className="font-bold text-xl">Verified NGOs:</h1>
-                                        <p>PhilanthroHub features vetted and credible NGOs, giving you peace of mind that your donations are going to legitimate and impactful organizations.</p>
+                                    <li className="flex w-full" style={{ padding: '2%' }}>
+                                        <div className="leftdiv02 flex flex-col items-start w-6/12">
+                                            <h1 className="font-bold text-xl">Simplified Donation Process:</h1>
+                                            <p>Streamlined tools and resources to make the donation process quick, easy, and secure, ensuring that your contributions reach the intended causes efficiently.</p>
+                                        </div>
                                     </li>
-                                    <li>
-                                        <h1 className="font-bold text-xl">User-Friendly Interface:</h1>
-                                        <p>Contributing to causes you care about can provide a sense of satisfaction and purpose.</p>
+                                    <li className="flex w-full" style={{ padding: '2%' }}>
+                                        <div className="leftdiv03 flex flex-col items-start w-6/12">
+                                            <h1 className="font-bold text-xl">Verified NGOs:</h1>
+                                            <p>PhilanthroHub features vetted and credible NGOs, giving you peace of mind that your donations are going to legitimate and impactful organizations.</p>
+                                        </div>
                                     </li>
-                                    <li>
-                                        <h1 className="font-bold text-xl">Tax Benefits:</h1>
-                                        <p>Designed with ease of use in mind, PhilanthroHub’s intuitive interface ensures a smooth and enjoyable experience for donors of all ages and tech-savviness levels.</p>
+                                    <li className="flex w-full" style={{ padding: '2%' }}>
+                                        <div className="leftdiv4 flex flex-col items-start w-6/12">
+                                            <h1 className="font-bold text-xl">User-Friendly Interface:</h1>
+                                            <p>Contributing to causes you care about can provide a sense of satisfaction and purpose.</p>
+                                        </div>
+                                    </li>
+                                    <li className="flex w-full" style={{ padding: '2%' }}>
+                                        <div className="leftdiv5 flex flex-col items-start w-6/12">
+                                            <h1 className="font-bold text-xl">Tax Benefits:</h1>
+                                            <p>Designed with ease of use in mind, PhilanthroHub’s intuitive interface ensures a smooth and enjoyable experience for donors of all ages and tech-savviness levels.</p>
+                                        </div>
                                     </li>
                                 </ul>
                             </div>
-                            <div className="reviews w-6/12 flex flex-col text-right">
-                                <div className="text-2xl font-bold flex justify-center">
+                            <div className="reviews w-full h-full flex flex-col text-right">
+                                <div className="donorheading text-4xl font-bold flex justify-center">
                                     <h1>Donor's Appreciations</h1>
                                 </div>
-                                <ul className="revitbl border-4">
+                                <ul className="revitbl relative">
+                                    <li className="svg-container flex items-center justify-center w-4/12 h-full absolute" style={{ padding: '2%' }}>
+                                        <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg" className="svg2">
+                                            <path d="M 100,10
+                                                     L 120,80
+                                                     L 190,80
+                                                     L 130,120
+                                                     L 150,190
+                                                     L 100,145
+                                                     L 50,190
+                                                     L 70,120
+                                                     L 10,80
+                                                     L 80,80
+                                                     Z"
+                                                fill="none" stroke="black" strokeWidth="2" />
+                                        </svg>
+                                    </li>
                                     {reviews.map((review, index) => (
-                                        <li key={index}>
-                                            <h1 className="font-bold text-xl">{review.name}</h1>
-                                            <p>{review.review}</p>
+                                        <li className={`review-item flex w-full justify-end ${index % 2 === 0 ? 'odd' : 'even'}`} style={{ padding: '2%' }} key={index}>
+                                            <div className="flex flex-col justify-end w-7/12">
+                                                <h1 className="font-bold text-xl">{review.name}</h1>
+                                                <p>{review.review}</p>
+                                            </div>
                                         </li>
                                     ))}
                                 </ul>
