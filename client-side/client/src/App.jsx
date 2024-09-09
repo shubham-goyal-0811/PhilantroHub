@@ -4,6 +4,7 @@ import Header from './components/header/Header';
 import Frontpage from './components/frontpage/Frontpage';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import Ngo from './components/ngo/Ngofp';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           </>}/>
           //login
         <Route path="/login" element={<Login />} />
+        <Route path="/ngo" element={<Ngo />} />
         <Route path="/login/signup" element={<Signup />} />
       </Routes>
     </Router>

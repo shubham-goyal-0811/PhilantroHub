@@ -11,7 +11,7 @@ export default function Options() {
                         </a>
                     </li>
                     <li>
-                        <a href="/" className="block text-gray-600 rounded">
+                        <a href="/ngo" className="block text-gray-600 rounded">
                             NGO
                         </a>
                     </li>
