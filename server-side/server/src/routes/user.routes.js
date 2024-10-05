@@ -22,12 +22,12 @@ router.route("/login").post(loginUser)
 router.route("/logout").post(verifyJWT,logoutUser);
 router.route("/refresh-token").post(refreshAccessToken);
 router.route("/change-password").post(verifyJWT,changeCurrentPassword);
-router.route("/current-user").get(verifyJWT,getCurrentUser);
-router.route("/update-account").patch(verifyJWT,updateAccountDetails);
-router.route("/update-idProof").patch(verifyJWT,
+router.route("/profile").get(verifyJWT,getCurrentUser);
+router.route("/profile/update").patch(verifyJWT,updateAccountDetails);
+router.route("/profile/updateId").patch(verifyJWT,
     upload.single("idProof"),changeIdproof
 )
-router.route("/update-avatar").patch(verifyJWT,upload.single("avatar"),changeAvatar);
+router.route("/profile/update-avatar").patch(verifyJWT,upload.single("avatar"),changeAvatar);
 
 
 

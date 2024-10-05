@@ -25,9 +25,9 @@ const generateAccessandRfreshToken = async (userId)=>{
 
 
 const registerUser = asyncHandler(async (req,res) =>{
-    const {fullName,email,username,confirmpassword,password,mobileNo} = req.body;
+    const {fullName,email,username,confirmpassword,password,mobileNo,role} = req.body;
     if(
-        [fullName,email,username,password,confirmpassword].some((field)=>{
+        [fullName,email,username,password,confirmpassword,role].some((field)=>{
              field?.trim() === ""
         })
         // we can use map too
@@ -85,7 +85,8 @@ const registerUser = asyncHandler(async (req,res) =>{
         email,
         password,
         username : username.toLowerCase(),
-        mobileNo
+        mobileNo,
+        role
     })
 
     const userCreated = await User.findById(user._id).select(
@@ -104,12 +105,14 @@ const registerUser = asyncHandler(async (req,res) =>{
 })
 
 const loginUser = asyncHandler(async (req,res)=>{
-    const {username,email,mobileNo,password} = req.body;
+    const {username,email,mobileNo,password,role} = req.body;
 
     if(!username && !email && !mobileNo){
         throw new ApiError(400,"Kindly Fill Atleast one of the given fields");
     }
-    
+    if(!role){
+        throw new ApiError(400, "Pleas enter your role");
+    }
     const user = await User.findOne({
         $or: [{username},{email},{mobileNo}]
     })
@@ -121,6 +124,10 @@ const loginUser = asyncHandler(async (req,res)=>{
     const isPassValid = await user.isPasswordCorrect(password);
     if(!isPassValid){
         throw new ApiError(401,"Invalid Password");
+    }
+
+    if(role !== user.role){
+        throw new ApiError(401,"No User found ");
     }
 
     const {acessToken,refreshToken} = await generateAccessandRfreshToken(user._id);

@@ -34,6 +34,11 @@ const userSchema = new Schema(
             type : String,
             required : true
         },
+        role : {
+            type : String,
+            enum : ['User','NGO'],
+            required : true,
+        },
         mobileNo : {
             type : String,
             required : true

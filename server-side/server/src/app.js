@@ -16,4 +16,6 @@ app.use(cookieparser());//used to access cookies of the browser
 import userRouter from './routes/user.routes.js';
 app.use("/api/v1/users",userRouter);
 
+import ngoRouter from './routes/ngo.routes.js';
+app.use("/api/v1/ngo",ngoRouter);
 export {app};
