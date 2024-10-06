@@ -21,8 +21,8 @@ export default function Loginout() {
         <>
             <div className="loginout flex items-center justify-center w-1/12">
                 {!isAuthenticated ? (
-                    <div className="login rounded-lg" style={{ padding: '10%' }}>
-                        <button onClick={() => navigate('../Login')}>Log in</button>
+                    <div onClick={() => navigate('../Login')} className="login rounded-lg" style={{ padding: '10%' }}>
+                        <button>Log in</button>
                     </div>
                 ) : (
                     <div className="user w-full flex rounded-lg justify-center">

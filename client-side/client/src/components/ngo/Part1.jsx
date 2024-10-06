@@ -27,19 +27,19 @@ export default function Part1() {
     }, []);
 
     const fetchNgos = async () => {
-        try{
+        try {
             const response = await fetch('http://localhost:8000/api/v1/ngo/getNgos');
             const data = await response.json();
             console.log('Fetched NGOs:', data);
-            if(data.success && Array.isArray(data.data)){
+            if (data.success && Array.isArray(data.data)) {
                 setNgosArray(data.data);
                 setFilteredNgos(data.data);
-            } 
-            else{
+            }
+            else {
                 console.error('Fetched data is not an array:', data);
             }
         }
-        catch(error){
+        catch (error) {
             console.error('Error fetching NGOs:', error);
         }
     };
@@ -63,25 +63,27 @@ export default function Part1() {
             <div className="parentmain1 h-full w-full">
                 <div className="childmain1">
                     <div className="ngos flex justify-between">
-                        <div className="cate h-full w-3/12" style={{ padding: "1%", margin: "0.5%" }}>
+                        <div className="cate flex flex-col h-full w-3/12 items-center text-nowrap bg-slate-100 rounded-3xl hover:scale-105 shadow-2xl duration-200" style={{ padding: "1%", margin: "0.5%" }}>
                             <h1 className="text-5xl text" style={{ padding: "1%", margin: "0.5%" }}>
-                                Types of NGOs
+                                Categories
                             </h1>
                             <hr className="h-1 bg-slate-400 rounded-full m-3" />
-                            <div className="types flex flex-col">
+                            <div className="types flex flex-col text-center">
                                 {ngoTypesArray.map((type, index) => (
-                                    <span key={index} className={`text-xl cursor-pointer ${selectedType === type ? "bg-gray-200 font-bold" : ""}`} style={{ padding: "1%", margin: "0.5%" }} onClick={() => handleTypeClick(type)}>
+                                    <span key={index} className={`text-xl cursor-pointer rounded-full ${selectedType === type ? "bg-gray-200 font-bold" : ""} hover:bg-gray-600 hover:text-white duration-500`} style={{ padding: "1%", margin: "0.5%" }} onClick={() => handleTypeClick(type)}>
                                         {type}
                                     </span>
                                 ))}
                             </div>
-                            <button onClick={handleClear} className="text-xl bg-slate-500 text-white rounded" style={{ padding: "1%", margin: "0.5%" }}>
-                                Clear
-                            </button>
+                            <div className="clr flex w-full" style={{ padding: "1%", margin: "0.5%" }}>
+                                <button onClick={handleClear} className="text-xl bg-slate-100 text-black rounded p-2 hover:bg-black hover:text-white duration-200" >
+                                    Clear
+                                </button>
+                            </div>
                         </div>
                         <div className="ngosdiv w-full h-full flex flex-col items-center" style={{ padding: "1%", margin: "0.5%" }}>
                             {filteredNgos.map((ngo, index) => (
-                                <div className="ngospace w-full flex flex-col text-4xl justify-center" style={{ padding: "0.5%", margin: "0.5%" }} key={index}>
+                                <div className="ngospace w-full flex flex-col text-4xl justify-center bg-slate-100 rounded-3xl shadow-2xl" style={{ padding: "0.5%", margin: "0.5%" }} key={index}>
                                     <div className="ngoTitle flex items-center justify-center w-full">
                                         <div className="ngotitle flex w-1/2 text-center justify-center">
                                             <h1>{ngo.name}</h1>
