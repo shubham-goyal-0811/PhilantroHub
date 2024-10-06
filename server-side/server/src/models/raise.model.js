@@ -21,3 +21,5 @@ const raiseSchema = new Schema ({
         }
     ]
 }) 
+
+export const Ticket =  mongoose.model('ticket',raiseSchema);
