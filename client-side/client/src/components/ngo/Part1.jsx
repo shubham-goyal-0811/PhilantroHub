@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Part1() {
     const ngoTypesArray = [
@@ -18,37 +18,45 @@ export default function Part1() {
         "Women Empowerment NGOs"
     ];
 
-    const ngosArray = [
-        {
-            name: "NGO Name 1",
-            description: "Description 1",
-            img: "https://example.com/img1.jpg",
-            type: ngoTypesArray[0]
-        },
-        {
-            name: "NGO Name 2",
-            description: "Description 2",
-            img: "https://example.com/img2.jpg",
-            type: "Advocacy NGOs"
-        },
-        {
-            name: "NGO Name 3",
-            description: "Description 3",
-            img: "https://example.com/img3.jpg",
-            type: "Educational NGOs"
-        },
-        {
-            name: "NGO Name 4",
-            description: "Description 4",
-            img: "https://example.com/img4.jpg",
-            type: "Environmental NGOs"
-        }
-    ];
+    const [ngosArray, setNgosArray] = useState([]);
+    const [filteredNgos, setFilteredNgos] = useState([]);
     const [selectedType, setSelectedType] = useState("");
+
+    useEffect(() => {
+        fetchNgos();
+    }, []);
+
+    const fetchNgos = async () => {
+        try{
+            const response = await fetch('http://localhost:8000/api/v1/ngo/getNgos');
+            const data = await response.json();
+            console.log('Fetched NGOs:', data);
+            if(data.success && Array.isArray(data.data)){
+                setNgosArray(data.data);
+                setFilteredNgos(data.data);
+            } 
+            else{
+                console.error('Fetched data is not an array:', data);
+            }
+        }
+        catch(error){
+            console.error('Error fetching NGOs:', error);
+        }
+    };
+
     const handleTypeClick = (type) => {
         setSelectedType(type);
+        const filtered = ngosArray.filter((ngo) => {
+            const ngoCategory = ngo.category ? ngo.category.toLowerCase() : "";
+            const selectedCategory = type.toLowerCase();
+            return ngoCategory.includes(selectedCategory) || selectedCategory.includes(ngoCategory);
+        });
+        setFilteredNgos(filtered);
     };
-    const filteredNgos = selectedType ? ngosArray.filter((ngo) => ngo.type === selectedType) : ngosArray;
+    const handleClear = () => {
+        setSelectedType("");
+        setFilteredNgos(ngosArray);
+    };
 
     return (
         <>
@@ -62,11 +70,14 @@ export default function Part1() {
                             <hr className="h-1 bg-slate-400 rounded-full m-3" />
                             <div className="types flex flex-col">
                                 {ngoTypesArray.map((type, index) => (
-                                    <span key={index} className={`text-2xl cursor-pointer ${selectedType === type ? "bg-gray-200 font-bold" : ""}`} style={{ padding: "1%", margin: "0.5%" }} onClick={() => handleTypeClick(type)}>
+                                    <span key={index} className={`text-xl cursor-pointer ${selectedType === type ? "bg-gray-200 font-bold" : ""}`} style={{ padding: "1%", margin: "0.5%" }} onClick={() => handleTypeClick(type)}>
                                         {type}
                                     </span>
                                 ))}
                             </div>
+                            <button onClick={handleClear} className="text-xl bg-slate-500 text-white rounded" style={{ padding: "1%", margin: "0.5%" }}>
+                                Clear
+                            </button>
                         </div>
                         <div className="ngosdiv w-full h-full flex flex-col items-center" style={{ padding: "1%", margin: "0.5%" }}>
                             {filteredNgos.map((ngo, index) => (
@@ -78,8 +89,8 @@ export default function Part1() {
                                     </div>
                                     <div className="ngodes&img flex justify-center">
                                         <div className="ngoimg" style={{ padding: "0.5%", margin: "0.5%" }}>
-                                            <div className="imghere w-full items-center">
-                                                <img src={ngo.img} alt="imgngo" />
+                                            <div className="imghere flex w-full items-center">
+                                                <img src={ngo.logo || "placeholder.jpg"} alt="imgngo" />
                                             </div>
                                         </div>
                                         <div className="ngodescription w-full text-center" style={{ padding: "0.5%", margin: "0.5%" }}>

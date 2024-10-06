@@ -17,13 +17,13 @@ export default function Signup() {
 
     const handleChange = (e) => {
         const { name, value, type, files } = e.target;
-        if (type === 'file') {
+        if(type === 'file'){
             setFormData(prevState => ({
                 ...prevState,
                 [name]: files[0]
             }));
         }
-         else {
+        else{
             setFormData(prevState => ({
                 ...prevState,
                 [name]: value
@@ -54,7 +54,7 @@ export default function Signup() {
         formDataToSend.append('email', email);
         formDataToSend.append('password', password);
         formDataToSend.append('confirmpassword', confirmpassword);
-        if (idProof) {
+        if(idProof){
             formDataToSend.append('idProof', idProof);
         }
 
