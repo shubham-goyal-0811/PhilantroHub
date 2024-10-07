@@ -25,7 +25,7 @@ export default function Part1() {
     useEffect(() => {
         fetchNgos();
     }, []);
-
+    //fetching data and storing it in ngos and filteredngos array.
     const fetchNgos = async () => {
         try {
             const response = await fetch('http://localhost:8000/api/v1/ngo/getNgos');
@@ -43,7 +43,7 @@ export default function Part1() {
             console.error('Error fetching NGOs:', error);
         }
     };
-
+    //filtering of ngos.
     const handleTypeClick = (type) => {
         setSelectedType(type);
         const filtered = ngosArray.filter((ngo) => {
@@ -53,6 +53,7 @@ export default function Part1() {
         });
         setFilteredNgos(filtered);
     };
+    //clear button
     const handleClear = () => {
         setSelectedType("");
         setFilteredNgos(ngosArray);
@@ -70,7 +71,7 @@ export default function Part1() {
                             <hr className="h-1 bg-slate-400 rounded-full m-3" />
                             <div className="types flex flex-col text-center">
                                 {ngoTypesArray.map((type, index) => (
-                                    <span key={index} className={`text-xl cursor-pointer rounded-full ${selectedType === type ? "bg-gray-200 font-bold" : ""} hover:bg-gray-600 hover:text-white duration-500`} style={{ padding: "1%", margin: "0.5%" }} onClick={() => handleTypeClick(type)}>
+                                    <span key={index} className={`text-xl cursor-pointer rounded-full ${selectedType === type ? "bg-gray-200 font-bold" : ""} hover:bg-gray-600 hover:text-white duration-500`} style={{ padding: "2%", margin: "0.5%" }} onClick={() => handleTypeClick(type)}>
                                         {type}
                                     </span>
                                 ))}
@@ -92,10 +93,10 @@ export default function Part1() {
                                     <div className="ngodes&img flex justify-center">
                                         <div className="ngoimg" style={{ padding: "0.5%", margin: "0.5%" }}>
                                             <div className="imghere flex w-full items-center">
-                                                <img src={ngo.logo || "placeholder.jpg"} alt="imgngo" />
+                                                <img src={ngo.logo} alt="imgngo" />
                                             </div>
                                         </div>
-                                        <div className="ngodescription w-full text-center" style={{ padding: "0.5%", margin: "0.5%" }}>
+                                        <div className="ngodescription w-auto text-center border-2 border-red-100 border-dashed" style={{ padding: "0.5%", margin: "0.5%" }}>
                                             <h1>{ngo.description}</h1>
                                         </div>
                                     </div>
