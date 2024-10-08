@@ -1,11 +1,9 @@
-import { useState, useEffect, Suspense, useRef } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Environment, OrbitControls } from '@react-three/drei';
 import Earth from '../../../public/Earth';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function Page1() {
     const qts = [
@@ -35,7 +33,6 @@ export default function Page1() {
         },
     ];
     const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
-    const earthRef = useRef();
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -44,27 +41,6 @@ export default function Page1() {
         return () => clearInterval(interval);
     }, [qts.length]);
 
-    useEffect(() => {
-        // GSAP animation for Earth rotation
-        if (earthRef.current) {
-            gsap.to(earthRef.current.rotation, {
-                y: 1.4 * Math.PI, // Rotate the Earth until India is visible (around 80° longitude, ~1.4 * Math.PI in radians)
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: '.frontpage_main1',
-                    start: 'top top',
-                    end: 'bottom top',
-                    scrub: true, // Animation controlled by scroll
-                    onLeave: () => {
-                        // Scroll to the next section when the rotation ends
-                        gsap.to(window, { scrollTo: { y: window.innerHeight, autoKill: false }, duration: 1 });
-                    },
-                }
-            });
-        }
-    }, []);
-
-
     return (
         <>
             <div className="frontpage_main1 flex flex-col w-auto items-center h-screen bg-black" style={{ padding: '1%', height: '92vh' }}>
@@ -72,10 +48,10 @@ export default function Page1() {
 
                     <div className="title flex justify-center" style={{ marginTop: '1.1%' }}>
                         <div className="t1 text-7xl font-bold text-white">
-                            <span className="inline-block">P</span><span className="inline-block">H</span><span className="inline-block">I</span><span className="inline-block">L</span><span className="inline-block">A</span><span className="inline-block">N</span><span className="inline-block">T</span><span className="inline-block">R</span><span className="inline-block">O</span>
+                            <span className="s1 inline-block">P</span><span className="s2 inline-block">H</span><span className="s3 inline-block">I</span><span className="s4 inline-block">L</span><span className="s5 inline-block">A</span><span className="s6 inline-block">N</span><span className="s7 inline-block">T</span><span className="s8 inline-block">R</span><span className="s9 inline-block">O</span>
                         </div>
                         <div className="t2 text-7xl font-bold text-white">
-                            <span className="inline-block">H</span><span className="inline-block">U</span><span className="inline-block">B</span>
+                            <span className="s10 inline-block">H</span><span className="s11 inline-block">U</span><span className="s12 inline-block">B</span>
                         </div>
                     </div>
 
@@ -85,7 +61,7 @@ export default function Page1() {
                                 <ambientLight intensity={1.5}/>
                                 <OrbitControls/>
                                 <Suspense fallback={null} > 
-                                    <Earth ref={earthRef} />
+                                    <Earth/>
                                 </Suspense>
                                 <Environment preset='sunset'/>
                             </Canvas>

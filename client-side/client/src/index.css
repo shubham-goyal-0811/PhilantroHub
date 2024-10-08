@@ -240,8 +240,8 @@ ul li a:hover {
 } 
 @keyframes fadeIn {
     0%{
-      opacity: 0;
-      transform: translateY(20px);
+        opacity: 0;
+        transform: translateY(20px);
     }
     100% {
       opacity: 1;
@@ -250,16 +250,185 @@ ul li a:hover {
 }
 @keyframes rotate360 {
     from {
-      transform: rotate(0deg);
+        opacity: 0;
+        transform: scale(0) translateZ(-1000px);
     }
     to {
-      transform: rotate(360deg);
+        opacity: 1;
+        transform: scale(1) translateZ(0);
     }
 }
-  
+@keyframes s1ani {
+    from {
+        font-size: 1rem;
+        opacity: 0;
+        transform: translateX(-50px) translateY(-50px) rotate(40deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px) rotate(0deg);
+    }
+}
+@keyframes s2ani {
+    from {
+        font-size: 1rem;
+        opacity: 0;
+        transform: translateX(50px) translateY(-50px) rotate(80deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px) rotate(0deg);
+    }
+}
+@keyframes s3ani {
+    from {
+        font-size: 1rem;
+        opacity: 0;
+        transform: translateX(-50px) translateY(50px) rotate(120deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px) rotate(0deg);
+    }
+}
+@keyframes s4ani {
+    from {
+        font-size: 1rem;
+        opacity: 0;
+        transform: translateX(-50px) translateY(-50px) rotate(160deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px) rotate(0deg);
+    }
+}
+@keyframes s5ani {
+    from {
+        font-size: 1rem;
+        opacity: 0;
+        transform: translateX(50px) translateY(-50px) rotate(200deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px) rotate(0deg);
+    }
+}
+@keyframes s6ani {
+    from {
+        font-size: 1rem;
+        opacity: 0;
+        transform: translateX(50px) translateY(-50px) rotate(240deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px) rotate(0deg);
+    }
+}
+@keyframes s7ani {
+    from {
+        font-size: 1rem;
+        opacity: 0;
+        transform: translateX(50px) translateY(50px) rotate(280deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px) rotate(0deg);
+    }
+}
+@keyframes s8ani {
+    from {
+        font-size: 1rem;
+        opacity: 0;
+        transform: translateX(-50px) translateY(-50px) rotate(320deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px) rotate(0deg);
+    }
+}
+@keyframes s9ani {
+    from {
+        font-size: 1rem;
+        opacity: 0;
+        transform: translateX(-50px) translateY(50px) rotate(360deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px) rotate(0deg);
+    }
+}
+@keyframes s10ani {
+    from {
+        font-size: 1rem;
+        opacity: 0;
+        transform: translateX(50px) translateY(-50px) rotate(330deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px) rotate(0deg);
+    }
+}
+@keyframes s11ani {
+    from {
+        font-size: 1rem;
+        opacity: 0;
+        transform: translateX(-50px) translateY(50px) rotate(300deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px) rotate(0deg);
+    }
+}
+@keyframes s12ani {
+    from {
+        font-size: 1rem;
+        opacity: 0;
+        transform: translateX(50px) translateY(-50px) rotate(270deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px) rotate(0deg);
+    }
+}
 .fade-in {
     animation: fadeIn 0.5s ease-in-out;
 }
-Earth{
-    animation: rotate360 2s infinite linear;
+.s1{
+    animation: s1ani 2s ease-in-out;
+}
+.s2{
+    animation: s2ani 2s ease-in-out;
+}
+.s3{
+    animation: s3ani 2s ease-in-out;
+}
+.s4{
+    animation: s4ani 2s ease-in-out;
+}
+.s5{
+    animation: s5ani 2s ease-in-out;
+}
+.s6{
+    animation: s6ani 2s ease-in-out;
+}
+.s7{
+    animation: s7ani 2s ease-in-out;
+}
+.s8{
+    animation: s8ani 2s ease-in-out;
+}
+.s9{
+    animation: s9ani 2s ease-in-out;
+}
+.s10{
+    animation: s10ani 2s ease-in-out;
+}
+.s11{
+    animation: s11ani 2s ease-in-out;
+}
+.s12{
+    animation: s12ani 2s ease-in-out;
+}
+canvas {
+    animation: rotate360 2.5s ease-in-out;
 }
