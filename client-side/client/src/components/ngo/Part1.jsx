@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import { useNavigate } from 'react-router-dom';
 export default function Part1() {
     const ngoTypesArray = [
         "All NGOS",
@@ -22,6 +22,7 @@ export default function Part1() {
     const [ngosArray, setNgosArray] = useState([]);
     const [filteredNgos, setFilteredNgos] = useState([]);
     const [selectedType, setSelectedType] = useState("");
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchNgos();
@@ -59,7 +60,9 @@ export default function Part1() {
         setSelectedType("");
         setFilteredNgos(ngosArray);
     }
-
+    const handleViewMore = (ngo) => {
+        navigate(`/view-more/${ngo.name}`, { state: { ngo } });
+    };
     return (
         <>
             <div className="parentmain1 h-full w-full">
@@ -97,7 +100,7 @@ export default function Part1() {
                                         </div>
                                     </div>
                                     <div className="visitbutton flex justify-center">
-                                        <button className="bg-slate-300 rounded-lg text-xl hover:bg-slate-500 duration-200 hover:text-white" style={{ padding: "0.5%", margin: "0.5%" }}>View More</button>
+                                        <button className="bg-slate-300 rounded-lg text-xl hover:bg-slate-500 duration-200 hover:text-white" style={{ padding: "0.5%", margin: "0.5%" }} onClick={() => handleViewMore(ngo)} >View More</button>
                                     </div>
                                 </div>
                             ))}

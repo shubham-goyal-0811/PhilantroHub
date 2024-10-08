@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Img1 from '../../img/NGOSITE_img1.png';
+
 export default function Page1() {
     const qts = [
         {
