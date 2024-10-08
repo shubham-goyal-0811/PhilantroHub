@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react';
-import Img1 from '../../img/NGOSITE_img1.png';
+import { useState, useEffect, Suspense } from 'react';
+import { Canvas } from '@react-three/fiber';
+import { Environment, OrbitControls } from '@react-three/drei';
+import Earth from '../../../public/Earth';
 
 export default function Page1() {
     const qts = [
@@ -39,7 +41,7 @@ export default function Page1() {
 
     return (
         <>
-            <div className="frontpage_main1 flex flex-col w-auto items-center h-screen" style={{ padding: '1%', height: '92vh' }}>
+            <div className="frontpage_main1 flex flex-col w-auto items-center h-screen bg-black" style={{ padding: '1%', height: '92vh' }}>
                 <div className="frontpape_part1 flex flex-col w-full h-full justify-between">
 
                     <div className="title flex justify-center" style={{ marginTop: '1.1%' }}>
@@ -52,12 +54,17 @@ export default function Page1() {
                     </div>
 
                     <div className="front_content flex items-center justify-evenly w-full h-full">
-                        <div className="picture w-2/5">
-                            <div className="act_pic flex justify-center">
-                                <img src={Img1} alt="" className="rounded-full" />
-                            </div>
+                        <div className="picture w-6/12 h-full">
+                            <Canvas camera={{ position: [0, 0, 2], fov: 75 }}>
+                                <ambientLight intensity={1.5}/>
+                                <OrbitControls/>
+                                <Suspense fallback={null}> 
+                                    <Earth/>
+                                </Suspense>
+                                <Environment preset='sunset'/>
+                            </Canvas>
                         </div>
-                        <div className="quotes w-2/5 flex items-center text-center justify-center" style={{ margin: '1%', padding: '1%' }}>
+                        <div className="quotes w-2/5 flex items-center text-center justify-center text-white" style={{ margin: '1%', padding: '1%' }}>
                             <div className="act_qot">
                                 <h1 className="font-bold text-3xl">{qts[currentQuoteIndex].quote}</h1>
                                 <p className="text-xl">{qts[currentQuoteIndex].by}</p>
