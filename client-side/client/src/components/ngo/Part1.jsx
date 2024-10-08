@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 export default function Part1() {
     const ngoTypesArray = [
+        "All NGOS",
         "Charitable Organizations",
         "Advocacy NGOs",
         "Social Welfare Organizations",
@@ -54,10 +55,10 @@ export default function Part1() {
         setFilteredNgos(filtered);
     };
     //clear button
-    const handleClear = () => {
+    if (selectedType === "All NGOS") {
         setSelectedType("");
         setFilteredNgos(ngosArray);
-    };
+    }
 
     return (
         <>
@@ -76,29 +77,27 @@ export default function Part1() {
                                     </span>
                                 ))}
                             </div>
-                            <div className="clr flex w-full" style={{ padding: "1%", margin: "0.5%" }}>
-                                <button onClick={handleClear} className="text-xl bg-slate-100 text-black rounded p-2 hover:bg-black hover:text-white duration-200" >
-                                    Clear
-                                </button>
-                            </div>
                         </div>
                         <div className="ngosdiv w-full h-full flex flex-col items-center" style={{ padding: "1%", margin: "0.5%" }}>
                             {filteredNgos.map((ngo, index) => (
-                                <div className="ngospace w-full flex flex-col text-4xl justify-center bg-slate-100 rounded-3xl shadow-2xl" style={{ padding: "0.5%", margin: "0.5%" }} key={index}>
+                                <div className={`ngospace w-full flex flex-col text-4xl justify-center bg-slate-100 rounded-3xl shadow-2xl fade-in`} style={{ padding: "0.5%", margin: "0.5%" }} key={index}>
                                     <div className="ngoTitle flex items-center justify-center w-full">
                                         <div className="ngotitle flex w-1/2 text-center justify-center">
-                                            <h1>{ngo.name}</h1>
+                                            <h1 className="font-bold text-5xl">{ngo.name}</h1>
                                         </div>
                                     </div>
-                                    <div className="ngodes&img flex justify-center">
-                                        <div className="ngoimg" style={{ padding: "0.5%", margin: "0.5%" }}>
-                                            <div className="imghere flex w-full items-center">
-                                                <img src={ngo.logo} alt="imgngo" />
+                                    <div className="ngodes&img flex justify-evenly w-full">
+                                        <div className="ngoimg flex justify-center items-center" style={{ padding: "0.5%", margin: "0.5%" }}>
+                                            <div className="imghere flex w-6/12 items-center">
+                                                <img src={ngo.logo} alt="imgngo" className="rounded-full shadow-2xl" />
                                             </div>
                                         </div>
-                                        <div className="ngodescription w-auto text-center border-2 border-red-100 border-dashed" style={{ padding: "0.5%", margin: "0.5%" }}>
-                                            <h1>{ngo.description}</h1>
+                                        <div className="ngodescription w-6/12 text-center border-2 border-red-100 border-dashed" style={{ padding: "0.5%", margin: "0.5%" }}>
+                                            <h2 className="text-2xl">{ngo.description}</h2>
                                         </div>
+                                    </div>
+                                    <div className="visitbutton flex justify-center">
+                                        <button className="bg-slate-300 rounded-lg text-xl hover:bg-slate-500 duration-200 hover:text-white" style={{ padding: "0.5%", margin: "0.5%" }}>View More</button>
                                     </div>
                                 </div>
                             ))}
