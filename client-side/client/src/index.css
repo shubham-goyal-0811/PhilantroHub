@@ -248,8 +248,18 @@ ul li a:hover {
       transform: translateY(0);
     }
 }
+@keyframes rotate360 {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+}
   
 .fade-in {
     animation: fadeIn 0.5s ease-in-out;
 }
-  
+Earth{
+    animation: rotate360 2s infinite linear;
+}
