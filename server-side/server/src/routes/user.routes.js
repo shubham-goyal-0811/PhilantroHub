@@ -13,6 +13,10 @@ router.route("/register").post(
         {
             name : "avatar",
             maxCount : 1
+        },
+        {
+            name : "NGODOC",
+            maxCount : 1
         }
     ]),registerUser);
 
