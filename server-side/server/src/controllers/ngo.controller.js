@@ -3,18 +3,17 @@ import { ApiError } from "../utils/ApiError.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { asyncHandler } from "../utils/AsyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-import fs from 'fs';
+import fs from "fs";
 import { User } from "../models/user.model.js";
 
 const registerNgo = asyncHandler(async (req, res) => {
-    const user = await User.findById(req.user?._id);
-    if(user.role !== "NGO"){
-        throw new ApiError(401,"Unauthorized");
-    }
+  const user = await User.findById(req.user?._id);
+  if (user.role !== "NGO") {
+    throw new ApiError(401, "Unauthorized");
+  }
   const { name, email, description, address, category, contactNo } = req.body;
 
   if (!name || !email || !description || !address || !category || !contactNo) {
-    
     throw new ApiError(400, "All Fields are required");
   }
 
@@ -65,7 +64,7 @@ const registerNgo = asyncHandler(async (req, res) => {
     contactNo,
     idProof: idProof.url,
     logo: logo?.url || "",
-    createdBy : req.user._id
+    createdBy: req.user._id,
   });
 
   const ngoCreated = await Ngo.findById(ngo._id).select(" -refreshToken");
@@ -90,7 +89,8 @@ const getAllNgo = asyncHandler(async (req, res) => {
 
   const ngos = await Ngo.find(query)
     .populate({ path: "createdBy", model: "User" })
-    .sort({ createdAt: -1 }).select(" -donors -createdBy -idProof");
+    .sort({ createdAt: -1 })
+    .select(" -donors -createdBy -idProof");
   //populate to be added later
   if (!ngos) {
     throw new ApiError(404, "No Ngos found");
@@ -107,7 +107,8 @@ const getNgobyId = asyncHandler(async (req, res) => {
   }
   const ngo = await Ngo.findById(ngoId)
     .populate({ path: "createdBy", model: "User" })
-    .sort({ createdAt: -1 }).select(" -donors -createdBy -idProof"); //populate to tbe added later
+    .sort({ createdAt: -1 })
+    .select(" -donors -createdBy -idProof"); //populate to tbe added later
   if (!ngo) {
     throw new ApiError(404, "No Ngo found with the given criteria");
   }
@@ -119,11 +120,53 @@ const getNgobyAdmin = asyncHandler(async (req, res) => {
   if (user.role !== "NGO") {
     throw new ApiError(401, "Unauthorized request");
   }
-  const ngos = await Ngo.find({createdBy : user._id})
-  if(!ngos){
-    throw new ApiError(404,"No NGO found listed by you");
+  const ngos = await Ngo.find({ createdBy: user._id });
+  if (!ngos) {
+    throw new ApiError(404, "No NGO found listed by you");
   }
-  return res.status(200).json(new ApiResponse(200,ngos,"Successfully found"))
+  return res.status(200).json(new ApiResponse(200, ngos, "Successfully found"));
 });
 
-export { registerNgo, getAllNgo, getNgobyId,getNgobyAdmin };
+const updateNgo = asyncHandler(async (req, res) => {
+  const user = User.findById(req.params?._id);
+  if (user.role !== "NGO") {
+    throw new ApiError(401, "Unauthorized");
+  }
+  const id = req.params?.id;
+  if (!id) {
+    throw new ApiError(400, "No NGO ID found");
+  }
+
+  const { description, address, category, contactNo } = req.body;
+  const logoPath = req.files?.logo[0].path;
+  if (
+    !email &&
+    !description &&
+    !address &&
+    !category &&
+    !contactNo &&
+    !logoPath
+  ) {
+    throw new ApiError(400, "Add something to change");
+  }
+
+  const logo = await uploadOnCloudinary(logoPath);
+  if (!logo) {
+    throw new ApiError(500, "Something went wrong while updating the logo");
+  }
+
+  const updateData = {
+    description,
+    address,
+    category,
+    contactNo,
+    logo: logoPath.url,
+  };
+  const ngo = await Ngo.findByIdAndUpdate(id, updateData, { new: true });
+  if (!ngo) {
+    throw new ApiError(500, "Something went wrong while updtaing the ngo");
+  }
+  return res.status(200).json(new ApiResponse(200, ngo, "Updation succesfull"));
+});
+
+export { registerNgo, getAllNgo, getNgobyId, getNgobyAdmin, updateNgo };

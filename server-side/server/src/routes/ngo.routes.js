@@ -6,6 +6,7 @@ import {
   getNgobyAdmin,
   getNgobyId,
   registerNgo,
+  updateNgo,
 } from "../controllers/ngo.controller.js";
 
 const router = Router();
@@ -30,4 +31,5 @@ router.route("/getNgo/:id").get(getNgobyId);
 
 router.route("/getUserNgo").get(verifyJWT, getNgobyAdmin);
 
+router.route("/getNgo/:id/update").patch(verifyJWT, updateNgo);
 export default router;
