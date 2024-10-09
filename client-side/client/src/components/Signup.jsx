@@ -52,13 +52,13 @@ export default function Signup() {
         if (FundRaiser) {
             setSecondFormVisible(true);
         } else {
-            submitFormData();
+            handleSubmit();
         }
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        const { mobileNo, username, email, confirmpassword, password, fullName, idProof } = formData;
+        if (e) e.preventDefault(); 
+        const { mobileNo, username, email, confirmpassword, password, fullName, idProof, avatar } = formData;
 
         if (password !== confirmpassword) {
             setErrors('Passwords do not match');
@@ -79,16 +79,25 @@ export default function Signup() {
         formDataToSend.append('email', email);
         formDataToSend.append('password', password);
         formDataToSend.append('confirmpassword', confirmpassword);
+
+        //checking if fundraiser or donor
         if (FundRaiser) {
             formDataToSend.append('role', 'NGO');
         } else {
             formDataToSend.append('role', 'User');
         }
 
+        //avatar for your profile pic
+        if(avatar){
+            formDataToSend.append('avatar',avatar);
+        }
+
+        //id for human or not
         if (idProof) {
             formDataToSend.append('idProof', idProof);
         }
 
+        //sending the ngo document
         if (FundRaiser && formData.NGODOC) {
             formDataToSend.append('NGODOC', formData.NGODOC);
         }
@@ -108,7 +117,6 @@ export default function Signup() {
         }
     };
     const handleSecondFormSubmit = (e) => {
-        e.preventDefault();
         handleSubmit(e);
     };
     function handleFund() {
@@ -151,6 +159,10 @@ export default function Signup() {
                         <div className="mb-4">
                             <label htmlFor="picture" className="block text-gray-700">Upload id Proof</label>
                             <input type="file" id="idProof" name="idProof" onChange={handleChange} className="mt-1 block w-full border-2 border-gray-900 rounded" />
+                        </div>
+                        <div className="mb-4">
+                            <label htmlFor="picture" className="block text-gray-700">Upload avatar</label>
+                            <input type="file" id="avatar" name="avatar" onChange={handleChange} className="mt-1 block w-full border-2 border-gray-900 rounded" />
                         </div>
                         <div className="mb-4 flex flex-col">
                             <h1 className="text-2xl font-bold">SignUp as?</h1>
