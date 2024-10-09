@@ -128,19 +128,21 @@ const getNgobyAdmin = asyncHandler(async (req, res) => {
 });
 
 const updateNgo = asyncHandler(async (req, res) => {
-  const user = User.findById(req.params?._id);
-  if (user.role !== "NGO") {
-    throw new ApiError(401, "Unauthorized");
-  }
+  const user = await User.findById(req.user?._id);
+  
   const id = req.params?.id;
   if (!id) {
     throw new ApiError(400, "No NGO ID found");
   }
-
+  if(!user){
+    throw new ApiError(401,"User not found");
+  }
+  if (user.role !== "NGO") {
+    throw new ApiError(401, "Unauthorized");
+  }
   const { description, address, category, contactNo } = req.body;
   const logoPath = req.files?.logo[0].path;
   if (
-    !email &&
     !description &&
     !address &&
     !category &&
@@ -155,17 +157,28 @@ const updateNgo = asyncHandler(async (req, res) => {
     throw new ApiError(500, "Something went wrong while updating the logo");
   }
 
-  const updateData = {
-    description,
-    address,
-    category,
-    contactNo,
-    logo: logoPath.url,
-  };
-  const ngo = await Ngo.findByIdAndUpdate(id, updateData, { new: true });
+  
+  const ngo = await Ngo.findById(id);
   if (!ngo) {
     throw new ApiError(500, "Something went wrong while updtaing the ngo");
   }
+  if(description){
+    ngo.description = description;
+  }
+  if(address){
+    ngo.address = address;
+  }
+  // if(category){
+  //   ngo.category = category;
+  // }
+  if(contactNo){
+    ngo.contactNo = contactNo;
+  }
+  if(logoPath){
+    ngo.logo = logo.url;
+  }
+  await ngo.save();
+  
   return res.status(200).json(new ApiResponse(200, ngo, "Updation succesfull"));
 });
 

@@ -22,4 +22,4 @@ const raiseSchema = new Schema ({
     ]
 },{timestamps : true}) 
 
-export const Ticket =  mongoose.model('ticket',raiseSchema);
+export const Ticket =  mongoose.model('Ticket',raiseSchema);

@@ -12,7 +12,7 @@ export const postTicket = asyncHandler(async (req, res) => {
   }
 
   const ngoId = req.params?.id;
-  const ngo = Ngo.findById(ngoId);
+  const ngo = await Ngo.findById(ngoId);
   if (!ngo) {
     throw new ApiError(404, "No NGO found with given ID");
   }
@@ -21,7 +21,7 @@ export const postTicket = asyncHandler(async (req, res) => {
   if (!amount || !cause) {
     throw new ApiError(400, "Amount and cause are mandatory");
   }
-  const application = await Ticket({
+  const application = await Ticket.create({
     ngo: ngoId,
     amount,
     cause,
@@ -44,9 +44,9 @@ export const getAllTicket = asyncHandler(async (req, res) => {
   const keyword = req.query.keyword || "";
   const query = {
     $or: [
-      { title: { $regex: keyword, $options: "i" } },
+      { amount: { $regex: keyword, $options: "i" } },
       {
-        description: { $regex: keyword, $options: "i" },
+        cause: { $regex: keyword, $options: "i" },
       },
     ],
   };
@@ -60,12 +60,13 @@ export const getAllTicket = asyncHandler(async (req, res) => {
     throw new ApiError(404, "No NGO has raised a donation ticket");
   }
 
-  return res.status(200).json(200, donations, "data fetched");
+  return res.status(200).json(new ApiResponse(200, donations, "data fetched"));
 });
 
 export const getTicketbyNgo = asyncHandler(async (req, res) => {
+  
   const ngoId = req.params?.id;
-  const ngo = Ngo.findById(ngoId);
+  const ngo = await Ngo.findById(ngoId);
   if (!ngo) {
     throw new ApiError(404, "No NGO found with given ID");
   }
@@ -92,7 +93,7 @@ export const getTicketbyId = asyncHandler(async (req, res) => {
     if(!tickets){
         throw new ApiError(404,"No tickets found with the specified id");
     }
-    return res.status(200).json(200,tickets,'Tickets found succesfully');
+    return res.status(200).json(new ApiResponse(200,tickets,'Tickets found succesfully'));
 });
 
 

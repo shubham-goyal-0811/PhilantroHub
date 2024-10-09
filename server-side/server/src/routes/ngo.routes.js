@@ -31,5 +31,7 @@ router.route("/getNgo/:id").get(getNgobyId);
 
 router.route("/getUserNgo").get(verifyJWT, getNgobyAdmin);
 
-router.route("/getNgo/:id/update").patch(verifyJWT, updateNgo);
+router
+  .route("/getNgo/:id/update")
+  .patch(verifyJWT, upload.fields([{ name: "logo", maxCount: 1 }]), updateNgo);
 export default router;
