@@ -105,14 +105,12 @@ const registerUser = asyncHandler(async (req,res) =>{
 })
 
 const loginUser = asyncHandler(async (req,res)=>{
-    const {username,email,mobileNo,password,role} = req.body;
+    const {username,email,mobileNo,password} = req.body;
 
     if(!username && !email && !mobileNo){
         throw new ApiError(400,"Kindly Fill Atleast one of the given fields");
     }
-    if(!role){
-        throw new ApiError(400, "Pleas enter your role");
-    }
+    
     const user = await User.findOne({
         $or: [{username},{email},{mobileNo}]
     })
@@ -126,16 +124,14 @@ const loginUser = asyncHandler(async (req,res)=>{
         throw new ApiError(401,"Invalid Password");
     }
 
-    if(role !== user.role){
-        throw new ApiError(401,"No User found ");
-    }
+    // if(role !== user.role){
+    //     throw new ApiError(401,"No User found ");
+    // }
 
     const {acessToken,refreshToken} = await generateAccessandRfreshToken(user._id);
     user.refreshToken = refreshToken;
     const loggedInUser = await User.findById(user._id).select("-password -refreshToken");
 
-    console.log(acessToken);
-    console.log(refreshToken);
     
     const options = {
         httpOnly : true,

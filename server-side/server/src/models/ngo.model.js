@@ -30,11 +30,12 @@ const ngoSchema = new Schema({
     category : {
         type : String,
         required : true,
+        
     },
     raise : [
         {
             type : Schema.Types.ObjectId,
-            ref : 'Raise'
+            ref : 'Ticket'
         }
     ],
     contactNo : {

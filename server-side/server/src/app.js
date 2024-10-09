@@ -18,4 +18,7 @@ app.use("/api/v1/users",userRouter);
 
 import ngoRouter from './routes/ngo.routes.js';
 app.use("/api/v1/ngo",ngoRouter);
+
+import ticketRouter from './routes/tickets.routes.js';
+app.use("/api/v1/ticket",ticketRouter);
 export {app};
