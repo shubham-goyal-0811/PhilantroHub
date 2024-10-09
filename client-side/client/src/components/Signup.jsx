@@ -13,21 +13,46 @@ export default function Signup() {
         picture: null
     });
     const [errors, setErrors] = useState('');
+    const [FundRaiser, setFundRaiser] = useState(false);
+    const [secondFormVisible, setSecondFormVisible] = useState(false);
     const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value, type, files } = e.target;
-        if(type === 'file'){
+        if (type === 'file') {
             setFormData(prevState => ({
                 ...prevState,
                 [name]: files[0]
             }));
         }
-        else{
+        else {
             setFormData(prevState => ({
                 ...prevState,
                 [name]: value
             }));
+        }
+    };
+
+    const handleSubmit1 = async (e) => {
+        e.preventDefault();
+        const { mobileNo, username, email, confirmpassword, password, fullName } = formData;
+
+        if (password !== confirmpassword) {
+            setErrors('Passwords do not match');
+            return;
+        }
+
+        if (!password || !confirmpassword) {
+            setErrors('Please enter the password');
+            return;
+        }
+
+        setErrors('');
+
+        if (FundRaiser) {
+            setSecondFormVisible(true);
+        } else {
+            submitFormData();
         }
     };
 
@@ -54,8 +79,18 @@ export default function Signup() {
         formDataToSend.append('email', email);
         formDataToSend.append('password', password);
         formDataToSend.append('confirmpassword', confirmpassword);
-        if(idProof){
+        if (FundRaiser) {
+            formDataToSend.append('role', 'NGO');
+        } else {
+            formDataToSend.append('role', 'User');
+        }
+
+        if (idProof) {
             formDataToSend.append('idProof', idProof);
+        }
+
+        if (FundRaiser && formData.NGODOC) {
+            formDataToSend.append('NGODOC', formData.NGODOC);
         }
 
         try {
@@ -66,20 +101,29 @@ export default function Signup() {
             });
             console.log('Success:', response.data);
             navigate('/Login');
-        } 
+        }
         catch (error) {
             console.error('Error:', error.response?.data || error.message);
             setErrors('An error occurred. Please try again.');
         }
     };
-
+    const handleSecondFormSubmit = (e) => {
+        e.preventDefault();
+        handleSubmit(e);
+    };
+    function handleFund() {
+        setFundRaiser(true);
+    }
+    function handleFund2() {
+        setFundRaiser(false);
+    }
     return (
         <>
             <div className="login-container flex justify-center items-center min-h-screen bg-gray-100">
-                <div className="login-form bg-white p-8 rounded shadow-md w-full max-w-md">
+                <div className="login-form bg-white p-8 rounded shadow-2xl w-full max-w-md">
                     <h2 className="text-2xl font-semibold mb-6">Sign Up</h2>
                     {errors && <p className="text-red-500 mb-4">{errors}</p>}
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit1}>
                         <div className="mb-4">
                             <label htmlFor="fullName" className="block text-gray-700">Full Name</label>
                             <input type="text" id="fullName" name="fullName" required value={formData.fullName} onChange={handleChange} className="mt-1 block w-full border-2 border-gray-900 rounded" style={{ padding: '2%' }} />
@@ -108,6 +152,15 @@ export default function Signup() {
                             <label htmlFor="picture" className="block text-gray-700">Upload id Proof</label>
                             <input type="file" id="idProof" name="idProof" onChange={handleChange} className="mt-1 block w-full border-2 border-gray-900 rounded" />
                         </div>
+                        <div className="mb-4 flex flex-col">
+                            <h1 className="text-2xl font-bold">SignUp as?</h1>
+                            <div className="inputs flex">
+                                <label htmlFor="picture" className="block text-gray-700">Donor</label>
+                                <input type="radio" id="donorRadio" name="fav_language" value="Donor" onClick={handleFund2} className="mt-1 block w-full border-2 border-gray-900 rounded" />
+                                <label htmlFor="picture" className="block text-gray-700" >FundRaiser</label>
+                                <input type="radio" id="FundRaiserRadio" name="fav_language" value="FundRaiser" onClick={handleFund} className="mt-1 block w-full border-2 border-gray-900 rounded" />
+                            </div>
+                        </div>
                         <div className="flex">
                             <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-300 duration-500" style={{ margin: '1%' }}>
                                 Submit
@@ -118,6 +171,24 @@ export default function Signup() {
                         </div>
                     </form>
                 </div>
+                {secondFormVisible && (
+                    <div className="fundraiserDocmain absolute w-full h-screen">
+                        <div className="w-full h-full flex justify-center items-center">
+                            <div className="fundraiserDoc-form bg-white p-8 rounded shadow-2xl w-full max-w-md">
+                                <h1 className="text-2xl font-bold">Upload NGO Document</h1>
+                                <form onSubmit={handleSecondFormSubmit}>
+                                    <div className="mb-4">
+                                        <label htmlFor="NGODOC" className="block text-gray-700">Upload NGO Document</label>
+                                        <input type="file" id="NGODOC" name="NGODOC" onChange={handleChange} className="mt-1 block w-full border-2 border-gray-900 rounded" />
+                                    </div>
+                                    <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-300">
+                                        Submit Document
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         </>
     );

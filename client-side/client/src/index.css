@@ -441,6 +441,10 @@ ul li a:hover {
 .s12{
     animation: s12ani 2s ease-in-out;
 }
+.fundraiserDocmain{
+    backdrop-filter: blur(10px);
+    background-color: rgb(221, 218, 218);
+}
 canvas {
     animation: rotate360 2.5s ease-in-out;
 }
