@@ -31,6 +31,9 @@ export default function Part1() {
     const fetchNgos = async () => {
         try {
             const response = await fetch('http://localhost:8000/api/v1/ngo/getNgos');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
             const data = await response.json();
             console.log('Fetched NGOs:', data);
             if (data.success && Array.isArray(data.data)) {

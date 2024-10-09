@@ -5,7 +5,7 @@ import { useAuth } from './AuthContext';
 
 export default function Login() {
     const [formData, setFormData] = useState({
-        mobile: '',
+        mobileNo: '',
         username: '',
         email: '',
         password: ''

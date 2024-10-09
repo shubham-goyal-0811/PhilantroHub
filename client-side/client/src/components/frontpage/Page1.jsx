@@ -2,6 +2,7 @@ import { useState, useEffect, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Environment, OrbitControls } from '@react-three/drei';
 import Earth from '../../../public/Earth';
+import Stars from '../../img/bgstars.jpg';
 
 export default function Page1() {
     const qts = [
@@ -42,7 +43,7 @@ export default function Page1() {
     return (
         <>
             <div className="frontpage_main1 flex flex-col w-auto items-center h-screen bg-black" style={{ padding: '1%', height: '92vh' }}>
-                <div className="frontpape_part1 flex flex-col w-full h-full justify-between">
+                <div className="frontpape_part1 flex flex-col w-full h-full justify-between" style={{ backgroundImage: `url(${Stars})` }}>
 
                     <div className="title flex justify-center" style={{ marginTop: '1.1%' }}>
                         <div className="t1 text-7xl font-bold text-white">
@@ -57,7 +58,7 @@ export default function Page1() {
                         <div className="picture w-8/12 h-full rounded-full">
                             <Canvas camera={{ position: [0, 0, 2], fov: 75 }} className="rounded-full">
                                 <ambientLight intensity={1.5}/>
-                                <OrbitControls/>
+                                <OrbitControls enableZoom={false} />
                                 <Suspense fallback={null} > 
                                     <Earth/>
                                 </Suspense>
