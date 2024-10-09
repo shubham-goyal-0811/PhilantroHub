@@ -20,6 +20,6 @@ const raiseSchema = new Schema ({
             ref : "User",
         }
     ]
-}) 
+},{timestamps : true}) 
 
 export const Ticket =  mongoose.model('ticket',raiseSchema);
