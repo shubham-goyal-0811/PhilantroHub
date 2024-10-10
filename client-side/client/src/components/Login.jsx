@@ -41,7 +41,6 @@ export default function Login() {
         axios.post(backendUrl, formData)
             .then(response => {
                 console.log('Success:', response.data);
-                localStorage.setItem('accessToken', response.data.accessToken);
                 console.log(response.data.accessToken);
                 login({ username });
                 navigate('/');

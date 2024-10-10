@@ -24,21 +24,18 @@ export default function Profile() {
 
     const fetchProfile = async () => {
         try {
-            const token = localStorage.getItem('token');
-            console.log('Token:', token);
-            if (!token) {
-                console.error('No token found. User might not be logged in.');
-                return;
-            }
             const response = await fetch('http://localhost:8000/api/v1/users/profile', {
                 method: 'GET',
+                credentials: 'include',
                 headers: {
-                    'Authorization': 'Bearer ' + token,
+                    'Content-Type': 'application/json',
                 },
             });
+            
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
+    
             const data = await response.json();
             if (data.success) {
                 setProfile(data.data);
@@ -48,7 +45,7 @@ export default function Profile() {
         } catch (error) {
             console.error('Error fetching profile:', error);
         }
-    };            
+    };    
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -66,7 +63,6 @@ export default function Profile() {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + localStorage.getItem('token'),
                 },
                 body: JSON.stringify({
                     username: updatedProfile.username,
@@ -75,7 +71,7 @@ export default function Profile() {
                     newPassword: passwords.newPassword,
                 }),
             });
-    
+
             const data = await response.json();
             if (data.success) {
                 setProfile({ ...profile, ...updatedProfile });
@@ -87,7 +83,7 @@ export default function Profile() {
         } catch (error) {
             console.error('Error updating profile:', error);
         }
-    };    
+    };
 
     return (
         <div className="min-h-screen bg-off-white flex justify-center items-center">
