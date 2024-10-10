@@ -109,6 +109,10 @@ export default function Signup() {
                 }
             });
             console.log('Success:', response.data);
+            if (response.data.accessToken) {
+                localStorage.setItem('accessToken', response.data.accessToken);
+                console.log(response.data.accessToken);
+            }
             navigate('/Login');
         }
         catch (error) {

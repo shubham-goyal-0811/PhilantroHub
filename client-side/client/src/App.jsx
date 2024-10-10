@@ -6,6 +6,7 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Ngo from './components/ngo/Ngofp';
 import ViewMore from './components/ngo/ViewMore';
+import Profile from './components/Profile/Profile';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           </>}/>
           //login
         <Route path="/login" element={<Login />} />
+        <Route path="/users/profile" element={<Profile />} />
         <Route path="/ngo" element={<Ngo />} />
         <Route path="/login/signup" element={<Signup />} />
         <Route path="/view-more/:name" element={<ViewMore />} />
