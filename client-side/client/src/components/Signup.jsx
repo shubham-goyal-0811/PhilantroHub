@@ -68,6 +68,14 @@ export default function Signup() {
             setErrors('Please enter the password');
             return;
         }
+        if (!mobileNo) {
+            setErrors('Please enter a valid Mobile Number');
+            return;
+        }
+        if (!username) {
+            setErrors('Please enter a valid Username');
+            return;
+        }
         setErrors('');
 
         const backendUrl = '/api/v1/users/register';
