@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const getCookieValue = (name) => {
     const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
@@ -8,10 +8,45 @@ const getCookieValue = (name) => {
 };
 
 export default function Loginout() {
+    const [profile, setProfile] = useState({
+        username: '',
+        email: '',
+        avatar: '',
+        fullName: '',
+        role: '',
+        mobileNo: '',
+        donation: [],
+    });
     const navigate = useNavigate();
-    const { isAuthenticated, username } = useAuth();
+    const { isAuthenticated } = useAuth();
     const { logout } = useAuth();
     const [dropdownVisible, setDropdownVisible] = useState(false);
+
+    useEffect(() => {
+        fetchProfile();
+    }, []);
+
+    const fetchProfile = async () => {
+        try {
+            const response = await fetch('http://localhost:8000/api/v1/users/profile', {
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+                },
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                setProfile(data.data);
+            } else {
+                console.error('Failed to fetch profile:', data.message);
+            }
+        } catch (error) {
+            console.error('Error fetching profile:', error);
+        }
+    };
 
     const getInitials = (name) => {
         const names = name.split(' ');
@@ -45,14 +80,14 @@ export default function Loginout() {
                                 {avatarUrl ? (
                                         <img src={avatarUrl} alt="User Avatar" className="rounded-full w-full h-full object-cover" />) : (
                                         <span style={{ lineHeight: '4rem', fontSize: '1.5rem' }}>
-                                            {getInitials(username)}
+                                            {getInitials(profile.username)}
                                         </span>
                                     )}
                                 </div>
                             </button>
                             {dropdownVisible && (
                                 <div className="absolute top-20 right-0 bg-white shadow-lg rounded-lg p-4 z-10">
-                                    <div className="text-center mb-2">Welcome, {username}</div>
+                                    <div className="text-center mb-2">Welcome, {profile.username}</div>
                                     <div className="logout flex justify-center items-center">
                                         <button
                                             className="bg-slate-300 p-1 rounded-xl whitespace-nowrap hover:bg-slate-600 hover:text-white duration-500"

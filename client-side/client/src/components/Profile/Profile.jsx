@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Header from '../header/Header';
 
 export default function Profile() {
     const [profile, setProfile] = useState({
         username: '',
         email: '',
-        fullName: '',
         avatar: '',
+        fullName: '',
         role: '',
         mobileNo: '',
         donation: [],
     });
 
     const [isEditing, setIsEditing] = useState(false);
+    const [isChangingPassword, setIsChangingPassword] = useState(false);
     const [updatedProfile, setUpdatedProfile] = useState({ ...profile });
-    const [passwords, setPasswords] = useState({ currentPassword: '', newPassword: '' });
+    const [passwords, setPasswords] = useState({ oldPassword: '', newPassword: '' });
 
     const navigate = useNavigate();
 
@@ -29,23 +31,21 @@ export default function Profile() {
                 credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
                 },
             });
-            
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-    
+
             const data = await response.json();
             if (data.success) {
                 setProfile(data.data);
+                setUpdatedProfile(data.data);
             } else {
                 console.error('Failed to fetch profile:', data.message);
             }
         } catch (error) {
             console.error('Error fetching profile:', error);
         }
-    };    
+    };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -57,18 +57,19 @@ export default function Profile() {
         setPasswords({ ...passwords, [name]: value });
     };
 
-    const handleSubmit = async () => {
+    const handleChange = async () => {
         try {
             const response = await fetch('http://localhost:8000/api/v1/users/profile/update', {
                 method: 'PATCH',
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
+                    fullName: updatedProfile.fullName,
                     username: updatedProfile.username,
                     email: updatedProfile.email,
-                    currentPassword: passwords.currentPassword,
-                    newPassword: passwords.newPassword,
+                    mobileNo: updatedProfile.mobileNo,
                 }),
             });
 
@@ -85,20 +86,65 @@ export default function Profile() {
         }
     };
 
+    const handlePasswordChangeSubmit = async () => {
+        try {
+            const response = await fetch('http://localhost:8000/api/v1/users/change-password', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+                },
+                body: JSON.stringify({
+                    oldPassword: passwords.oldPassword,
+                    newPassword: passwords.newPassword,
+                }),
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                alert('Password changed successfully!');
+                setIsChangingPassword(false);
+                navigate('/Login');
+            } else {
+                alert('Failed to change password: ' + data.message);
+            }
+        } catch (error) {
+            console.error('Error changing password:', error);
+        }
+    };
+
     return (
-        <div className="min-h-screen bg-off-white flex justify-center items-center">
-            <div className="bg-white p-10 rounded-2xl shadow-2xl w-full max-w-4xl">
-                <div className="flex items-center justify-between mb-6">
-                    <h1 className="text-3xl font-bold">Profile</h1>
-                    {!isEditing && (
-                        <button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700" onClick={() => setIsEditing(true)}>
-                            Edit Profile
-                        </button>
-                    )}
-                </div>
-                {isEditing ? (
-                    <>
+        <>
+            <Header />
+            <div className="min-h-screen bg-off-white flex justify-center items-center">
+                <div className="bg-white p-10 rounded-2xl shadow-2xl w-full max-w-4xl">
+                    <div className="flex items-center justify-between mb-6">
+                        <h1 className="text-3xl font-bold">Profile</h1>
+                        {!isEditing && !isChangingPassword && (
+                            <button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700 duration-200" onClick={() => setIsEditing(true)}>
+                                Edit Profile
+                            </button>
+                        )}
+                        {!isChangingPassword && !isEditing && (
+                            <button className="bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-yellow-700 ml-4 duration-200" onClick={() => setIsChangingPassword(true)}>
+                                Change Password
+                            </button>
+                        )}
+                    </div>
+
+                    {isEditing ? (
                         <div className="space-y-4">
+                            <div>
+                                <label className="block font-semibold">Full Name</label>
+                                <input
+                                    type="text"
+                                    name="fullName"
+                                    value={updatedProfile.fullName}
+                                    onChange={handleInputChange}
+                                    className="w-full border p-2 rounded-lg"
+                                />
+                            </div>
                             <div>
                                 <label className="block font-semibold">Username</label>
                                 <input
@@ -120,11 +166,36 @@ export default function Profile() {
                                 />
                             </div>
                             <div>
+                                <label className="block font-semibold">Mobile Number</label>
+                                <input
+                                    type="number"
+                                    name="mobileNo"
+                                    value={updatedProfile.mobileNo}
+                                    onChange={handleInputChange}
+                                    className="w-full border p-2 rounded-lg"
+                                />
+                            </div>
+                            <button
+                                className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700"
+                                onClick={handleChange}
+                            >
+                                Save Changes
+                            </button>
+                            <button
+                                className="ml-4 bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-700"
+                                onClick={() => setIsEditing(false)}
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    ) : isChangingPassword ? (
+                        <div className="space-y-4">
+                            <div>
                                 <label className="block font-semibold">Current Password</label>
                                 <input
                                     type="password"
-                                    name="currentPassword"
-                                    value={passwords.currentPassword}
+                                    name="oldPassword"
+                                    value={passwords.oldPassword}
                                     onChange={handlePasswordChange}
                                     className="w-full border p-2 rounded-lg"
                                 />
@@ -141,20 +212,18 @@ export default function Profile() {
                             </div>
                             <button
                                 className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-700"
-                                onClick={handleSubmit}
+                                onClick={handlePasswordChangeSubmit}
                             >
-                                Save Changes
+                                Change Password
                             </button>
                             <button
                                 className="ml-4 bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-700"
-                                onClick={() => setIsEditing(false)}
+                                onClick={() => setIsChangingPassword(false)}
                             >
                                 Cancel
                             </button>
                         </div>
-                    </>
-                ) : (
-                    <>
+                    ) : (
                         <div className="space-y-4">
                             <div className="flex items-center">
                                 <img src={profile.avatar} alt="avatar" className="rounded-full w-24 h-24 mr-6" />
@@ -184,9 +253,9 @@ export default function Profile() {
                                 </ul>
                             </div>
                         </div>
-                    </>
-                )}
+                    )}
+                </div>
             </div>
-        </div>
+        </>
     );
 }

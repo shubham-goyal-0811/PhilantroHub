@@ -236,15 +236,16 @@ const getCurrentUser = asyncHandler (async(req,res)=>{
 })
 
 const updateAccountDetails = asyncHandler (async(req,res)=>{
-    const {fullName,email,mobileNo } = req.body;
+    const {username,fullName,email,mobileNo } = req.body;
 
-    if(!fullName || !email ||!mobileNo){
-        throw new ApiError(400,"All fields are mandatory");
+    if(!username && !email && !mobileNo && !fullName){
+        throw new ApiError(400,"At least one field is mandatory to update");
     }
     const user = await User.findByIdAndUpdate(req.user?._id,
         {
             $set:{
                 fullName,
+                username,
                 email,
                 mobileNo
             }
