@@ -56,7 +56,7 @@ export default function Page1() {
 
                     <div className="front_content flex items-center justify-evenly w-full h-full">
                         <div className="picture w-8/12 h-full rounded-full">
-                            <Canvas camera={{ position: [0, 0, 2], fov: 75 }} className="rounded-full">
+                            <Canvas camera={{ position: [0, 0, 2], fov: 75 }}>
                                 <ambientLight intensity={1.5}/>
                                 <OrbitControls enableZoom={false} />
                                 <Suspense fallback={null} > 

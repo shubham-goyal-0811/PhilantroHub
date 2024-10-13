@@ -117,20 +117,24 @@ export default function Profile() {
     return (
         <>
             <Header />
-            <div className="min-h-screen bg-off-white flex justify-center items-center">
-                <div className="bg-white p-10 rounded-2xl shadow-2xl w-full max-w-4xl">
+            <div className="min-h-screen bg-off-white flex justify-center items-center bg-[#d2c9c9]">
+                <div className="bg-white p-10 rounded-2xl shadow-2xl w-full max-w-4xl hover:scale-105 duration-300">
                     <div className="flex items-center justify-between mb-6">
-                        <h1 className="text-3xl font-bold">Profile</h1>
-                        {!isEditing && !isChangingPassword && (
-                            <button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700 duration-200" onClick={() => setIsEditing(true)}>
-                                Edit Profile
-                            </button>
-                        )}
-                        {!isChangingPassword && !isEditing && (
-                            <button className="bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-yellow-700 ml-4 duration-200" onClick={() => setIsChangingPassword(true)}>
-                                Change Password
-                            </button>
-                        )}
+                        <div className="name">
+                            <h1 className="text-3xl font-bold">{updatedProfile.fullName}</h1>
+                        </div>
+                        <div className="">
+                            {!isEditing && !isChangingPassword && (
+                                <button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700 duration-200" onClick={() => setIsEditing(true)}>
+                                    Edit Profile
+                                </button>
+                            )}
+                            {!isChangingPassword && !isEditing && (
+                                <button className="bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-yellow-700 ml-4 duration-200" onClick={() => setIsChangingPassword(true)}>
+                                    Change Password
+                                </button>
+                            )}
+                        </div>
                     </div>
 
                     {isEditing ? (
@@ -228,21 +232,20 @@ export default function Profile() {
                             <div className="flex items-center">
                                 <img src={profile.avatar} alt="avatar" className="rounded-full w-24 h-24 mr-6" />
                                 <div>
-                                    <h2 className="text-xl font-bold">{profile.fullName}</h2>
                                     <p>{profile.role}</p>
                                 </div>
                             </div>
                             <div>
-                                <label className="block font-semibold">Username:</label>
-                                <p>{profile.username}</p>
+                                <label className="block font-semibold text-2xl">Username:</label>
+                                <p className="text-xl">{profile.username}</p>
                             </div>
                             <div>
-                                <label className="block font-semibold">Email:</label>
-                                <p>{profile.email}</p>
+                                <label className="block font-semibold text-2xl">Email:</label>
+                                <p className="text-xl">{profile.email}</p>
                             </div>
                             <div>
-                                <label className="block font-semibold">Mobile No:</label>
-                                <p>{profile.mobileNo}</p>
+                                <label className="block font-semibold text-2xl">Mobile No:</label>
+                                <p className="text-xl">{profile.mobileNo}</p>
                             </div>
                             <div>
                                 <label className="block font-semibold">Donations:</label>
