@@ -69,15 +69,16 @@ export default function Loginout() {
         <>
             <div className="loginout flex items-center justify-center w-1/12">
                 {!isAuthenticated ? (
-                    <div onClick={() => navigate('../Login')} className="login rounded-lg" style={{ padding: '10%' }}>
-                        <button>Log in</button>
+                    <div onClick={() => navigate('../Login')} className="login-button flex items-center justify-center cursor-pointer rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 hover:from-purple-600 hover:to-blue-500 text-white font-bold py-3 px-8 shadow-lg transform transition-transform hover:scale-110 active:scale-100">
+                        <span className="mr-2">🔑</span>
+                        Log in
                     </div>
                 ) : (
                     <div className="user w-full flex rounded-lg justify-center">
                         <div className="userinfo flex flex-col items-center relative">
                             <button>
                                 <div className="userImg w-full flex justify-center items-center bg-gray-400 text-white rounded-full hover:bg-gray-700 duration-200" style={{ width: '4rem', height: '4rem', lineHeight: '4rem', textAlign: 'center', fontSize: '1.5rem' }} onClick={toggleDropdown}>
-                                {avatarUrl ? (
+                                    {avatarUrl ? (
                                         <img src={avatarUrl} alt="User Avatar" className="rounded-full w-full h-full object-cover" />) : (
                                         <span style={{ lineHeight: '4rem', fontSize: '1.5rem' }}>
                                             {getInitials(profile.username)}

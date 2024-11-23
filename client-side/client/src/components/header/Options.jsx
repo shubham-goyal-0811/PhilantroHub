@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Search from '../../img/search.png';
 
-export default function Options() {
+export default function Options({scrolled}) {
     const [showSearchBar, setShowSearchBar] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
 
@@ -20,13 +20,13 @@ export default function Options() {
                 <ul className="flex font-medium justify-between items-center h-full w-full">
                     {!showSearchBar && (
                         <>
-                            <li>
-                                <a href="/" className="block text-gray-600 rounded">
+                            <li className="hover:font-bold hover:text-xl duration-300">
+                                <a href="/" className="block rounded">
                                     Home
                                 </a>
                             </li>
-                            <li>
-                                <a href="/ngo" className="block text-gray-600 rounded">
+                            <li className="hover:font-bold hover:text-xl duration-300">
+                                <a href="/ngo" className="block rounded">
                                     NGO
                                 </a>
                             </li>
@@ -37,7 +37,7 @@ export default function Options() {
                             <img
                                 src={Search}
                                 alt="Search"
-                                className="w-6/12 cursor-pointer"
+                                className={`w-7/12 cursor-pointer ${scrolled ? '' : 'filter invert'}`}
                                 onClick={handleSearchClick}
                             />
                         </div>
