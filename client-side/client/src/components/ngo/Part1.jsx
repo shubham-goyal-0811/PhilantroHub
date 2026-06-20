@@ -58,7 +58,9 @@ export default function Part1({ searchQuery }) {
     //fetching data and storing it in ngos and filteredngos array.
     const fetchNgos = async () => {
         try {
-            const response = await fetch('http://localhost:8000/api/v1/ngo/getNgos');
+            const response = await fetch('/api/v1/ngo/getNgos', {
+                credentials: 'include',
+            });
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -100,11 +102,11 @@ export default function Part1({ searchQuery }) {
         <div className="parentmain1 h-full w-full bg-[#d2c9c9]">
             <div className="childmain1 h-full overflow-hidden">
                 <div className="w-full flex justify-center">
-                    <h1 className="lg:text-7xl md:text-5xl sm:text-3xl font-bold">NGO's</h1>
+                    <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold">NGO's</h1>
                 </div>
-                <div className="ngos h-full flex justify-around overflow-hidden">
-                    <div className="cate flex flex-col w-3/12 h-2/12 items-center text-nowrap bg-[#f2f0ef] rounded-3xl shadow-2xl shadow-stone-800 duration-200" style={{ padding: "1%", margin: "2%" }}>
-                        <h1 className="text-5xl text" style={{ padding: "1%", margin: "0.5%" }}>
+                <div className="ngos h-full flex flex-col md:flex-row justify-around overflow-hidden">
+                    <div className="cate flex flex-col w-full md:w-3/12 h-2/12 items-center text-nowrap bg-[#f2f0ef] rounded-3xl shadow-2xl shadow-stone-800 duration-200" style={{ padding: "1%", margin: "2%" }}>
+                        <h1 className="text-3xl md:text-5xl text" style={{ padding: "1%", margin: "0.5%" }}>
                             Categories
                         </h1>
                         <hr className="h-1 bg-slate-400 w-full rounded-full m-3" />
@@ -113,7 +115,7 @@ export default function Part1({ searchQuery }) {
                                 <span
                                     key={index}
                                     ref={(el) => typeRefs.current[index] = el}
-                                    className={`catespan w-full text-2xl rounded-full ${selectedType === type ? "bg-gray-200 font-bold" : ""}`}
+                                    className={`catespan w-full text-lg md:text-2xl rounded-full ${selectedType === type ? "bg-gray-200 font-bold" : ""}`}
                                     style={{ padding: "3%", margin: "0.5%" }}
                                     onClick={() => handleTypeClick(type)}
                                 >
@@ -122,27 +124,27 @@ export default function Part1({ searchQuery }) {
                             ))}
                         </div>
                     </div>
-                    <div className="ngosdiv w-9/12 flex flex-col items-center" style={{ padding: "1%", margin: "0.5%" }}>
+                    <div className="ngosdiv w-full md:w-9/12 flex flex-col items-center" style={{ padding: "1%", margin: "0.5%" }}>
                         {filteredNgos.map((ngo, index) => (
                             <div
                                 ref={(el) => ngoRefs.current[index] = el}
-                                className="ngospace w-10/12 h-auto flex flex-col text-4xl justify-center bg-[#f2f0ef] rounded-3xl shadow-2xl shadow-stone-800"
-                                style={{ padding: "0.5%", margin: "0.5%" }}
+                                className="ngospace w-full md:w-10/12 h-auto flex flex-col text-2xl md:text-4xl justify-center bg-[#f2f0ef] rounded-3xl shadow-2xl shadow-stone-800 p-4 md:p-2"
+                                style={{ margin: "0.5%" }}
                                 key={index}
                             >
                                 <div className="ngoTitle flex items-center justify-center w-full">
-                                    <div className="ngotitle flex w-1/2 text-center justify-center">
-                                        <h1 className="font-bold text-5xl">{ngo.name}</h1>
+                                    <div className="ngotitle flex w-full md:w-1/2 text-center justify-center">
+                                        <h1 className="font-bold text-3xl md:text-5xl">{ngo.name}</h1>
                                     </div>
                                 </div>
-                                <div className="ngodes&img flex justify-evenly w-full">
+                                <div className="ngodes&img flex flex-col md:flex-row items-center justify-evenly w-full gap-4 md:gap-0">
                                     <div className="ngoimg flex justify-center items-center" style={{ padding: "0.5%", margin: "0.5%" }}>
-                                        <div className="imghere flex w-2/12 items-center">
-                                            <img src={ngo.logo} alt="imgngo" className="rounded-full shadow-2xl" />
+                                        <div className="imghere flex w-32 md:w-2/12 items-center">
+                                            <img src={ngo.logo} alt="imgngo" className="rounded-full shadow-2xl w-full" />
                                         </div>
                                     </div>
-                                    <div className="ngodescription flex w-6/12 text-center items-center justify-center border-2 border-[#bca77e] border-dashed rounded-2xl" style={{ padding: "0.5%", margin: "0.5%" }}>
-                                        <h2 className="text-2xl">{ngo.description}</h2>
+                                    <div className="ngodescription flex w-full md:w-6/12 text-center items-center justify-center border-2 border-[#bca77e] border-dashed rounded-2xl" style={{ padding: "0.5%", margin: "0.5%" }}>
+                                        <h2 className="text-base md:text-2xl">{ngo.description}</h2>
                                     </div>
                                 </div>
                                 <div className="visitbutton flex justify-center">

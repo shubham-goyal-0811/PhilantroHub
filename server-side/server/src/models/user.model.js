@@ -36,7 +36,7 @@ const userSchema = new Schema(
         },
         role : {
             type : String,
-            enum : ['User','NGO'],
+            enum : ['User','NGO','Admin'],
             required : true,
         },
         mobileNo : {
@@ -46,7 +46,7 @@ const userSchema = new Schema(
         donation:[
             {
             type : Schema.Types.ObjectId,
-            ref : "Donation"
+            ref : "Ticket"
             }
         ],
         password:{
@@ -80,7 +80,8 @@ userSchema.methods.generateAccessToken = function () {
         _id : this._id,
         email : this.email,
         username : this.username,
-        fullName : this.fullName
+        fullName : this.fullName,
+        role : this.role
         },
         process.env.ACCESS_TOKEN_SECRET,
         {

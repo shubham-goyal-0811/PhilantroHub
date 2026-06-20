@@ -28,7 +28,7 @@ export default function Loginout() {
 
     const fetchProfile = async () => {
         try {
-            const response = await fetch('http://localhost:8000/api/v1/users/profile', {
+            const response = await fetch('/api/v1/users/profile', {
                 method: 'GET',
                 credentials: 'include',
                 headers: {
@@ -69,8 +69,8 @@ export default function Loginout() {
         <>
             <div className="loginout flex items-center justify-center w-1/12">
                 {!isAuthenticated ? (
-                    <div onClick={() => navigate('../Login')} className="login-button flex items-center justify-center cursor-pointer rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 hover:from-purple-600 hover:to-blue-500 text-white font-bold py-3 px-8 shadow-lg transform transition-transform hover:scale-110 active:scale-100">
-                        <span className="mr-2">🔑</span>
+                    <div onClick={() => navigate('../Login')} className="login-button flex items-center justify-center whitespace-nowrap cursor-pointer rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 hover:from-purple-600 hover:to-blue-500 text-white font-bold text-sm md:text-base py-2 px-3 md:py-3 md:px-8 shadow-lg transform transition-transform hover:scale-110 active:scale-100">
+                        <span className="mr-1 md:mr-2">🔑</span>
                         Log in
                     </div>
                 ) : (
@@ -90,6 +90,13 @@ export default function Loginout() {
                                 <div className="absolute top-20 right-0 bg-white shadow-lg rounded-lg p-4 z-10">
                                     <div className="text-center mb-2">Welcome, {profile.username}</div>
                                     <div className="logout flex flex-col justify-center items-center">
+                                        {profile.role === 'Admin' && (
+                                            <button
+                                                className="bg-indigo-600 text-white rounded-xl whitespace-nowrap hover:bg-indigo-800 duration-500"
+                                                onClick={() => navigate('/admin')} style={{ padding: "10%", margin: "5%" }}>
+                                                Admin Dashboard
+                                            </button>
+                                        )}
                                         <button
                                             className="bg-slate-300 rounded-xl whitespace-nowrap hover:bg-slate-600 hover:text-white duration-500"
                                             onClick={handleLogout} style={{ padding: "10%", margin: "5%" }}>

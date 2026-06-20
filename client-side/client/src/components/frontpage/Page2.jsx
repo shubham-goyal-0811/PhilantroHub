@@ -182,15 +182,15 @@ export default function Page2() {
             <div className="frontpage_main2 h-full flex flex-col w-auto items-center">
                 <div className="frontpage_part2 w-full h-full">
                     <div className="questionNGO flex justify-center">
-                        <div className="NGO? text-6xl font-bold">
+                        <div className="NGO? text-4xl md:text-6xl font-bold">
                             <h1>NGO?</h1>
                         </div>
                     </div>
                     <div className="whatis flex flex-col h-full items-center">
-                        <div className="whatisngo text-4xl font-semibold">
+                        <div className="whatisngo text-2xl md:text-4xl font-semibold text-center">
                             <h1>What are NGOs?</h1>
                         </div>
-                        <div className="ans flex justify-center text-center w-6/12 text-2xl border-4">
+                        <div className="ans flex justify-center text-center w-11/12 md:w-6/12 text-lg md:text-2xl border-4">
                             <h2>A Non-Governmental Organization (NGO) is an independent, non-profit group dedicated to addressing social, environmental, and humanitarian issues. They work outside government control, advocating for causes like human rights, education, and health. NGOs empower communities, provide services, and influence policies to create positive social change.</h2>
                         </div>
                         <div className="types_whatis">
@@ -198,7 +198,7 @@ export default function Page2() {
                         </div>
                         <div className="tbl flex flex-col w-full h-full items-center">
                             <div className="flex flex-col benefits w-full h-auto">
-                                <div className="text-6xl font-bold flex justify-center">
+                                <div className="text-4xl md:text-6xl font-bold flex justify-center">
                                     <h1>Benefits</h1>
                                 </div>
                                 <ul className="flex flex-col items-center">
@@ -254,42 +254,42 @@ export default function Page2() {
                                         </svg>
                                     </li>
                                     <li className="flex w-full justify-start" style={{ padding: '2%' }}>
-                                        <div className="leftdiv1 flex flex-col items-start w-5/12">
-                                            <h1 className="font-bold text-4xl">Support for Important Causes:</h1>
-                                            <p className="text-2xl">Your contributions can help fund essential programs and services, such as education, healthcare, and environmental conservation.</p>
+                                        <div className="leftdiv1 flex flex-col items-start w-11/12 md:w-5/12">
+                                            <h1 className="font-bold text-2xl md:text-4xl">Support for Important Causes:</h1>
+                                            <p className="text-lg md:text-2xl">Your contributions can help fund essential programs and services, such as education, healthcare, and environmental conservation.</p>
                                         </div>
                                     </li>
                                     <li className="flex w-full justify-end" style={{ padding: '2%' }}>
-                                        <div className="rightdiv1 flex flex-col items-end text-right w-5/12">
-                                            <h1 className="font-bold text-4xl">Positive Impact on Communities:</h1>
-                                            <p className="text-2xl">Donations can lead to significant improvements in the quality of life for individuals and communities in need.</p>
+                                        <div className="rightdiv1 flex flex-col items-end text-right w-11/12 md:w-5/12">
+                                            <h1 className="font-bold text-2xl md:text-4xl">Positive Impact on Communities:</h1>
+                                            <p className="text-lg md:text-2xl">Donations can lead to significant improvements in the quality of life for individuals and communities in need.</p>
                                         </div>
                                     </li>
                                     <li className="flex w-full justify-start" style={{ padding: '2%' }}>
-                                        <div className="leftdiv2 flex flex-col items-start w-5/12">
-                                            <h1 className="font-bold text-4xl">Advancement of Social Justice:</h1>
-                                            <p className="text-2xl">NGOs often work on issues related to human rights and social equity, helping to address and rectify injustices.</p>
+                                        <div className="leftdiv2 flex flex-col items-start w-11/12 md:w-5/12">
+                                            <h1 className="font-bold text-2xl md:text-4xl">Advancement of Social Justice:</h1>
+                                            <p className="text-lg md:text-2xl">NGOs often work on issues related to human rights and social equity, helping to address and rectify injustices.</p>
                                         </div>
                                     </li>
                                     <li className="flex w-full justify-end" style={{ padding: '2%' }}>
-                                        <div className="rightdiv2 flex flex-col items-end text-right w-5/12">
-                                            <h1 className="font-bold text-4xl">Personal Fulfillment:</h1>
-                                            <p className="text-2xl">Contributing to causes you care about can provide a sense of satisfaction and purpose.</p>
+                                        <div className="rightdiv2 flex flex-col items-end text-right w-11/12 md:w-5/12">
+                                            <h1 className="font-bold text-2xl md:text-4xl">Personal Fulfillment:</h1>
+                                            <p className="text-lg md:text-2xl">Contributing to causes you care about can provide a sense of satisfaction and purpose.</p>
                                         </div>
                                     </li>
                                     <li className="flex w-full justify-start" style={{ padding: '2%' }}>
-                                        <div className="leftdiv3 flex flex-col items-start w-5/12">
-                                            <h1 className="font-bold text-4xl">Tax Benefits:</h1>
-                                            <p className="text-2xl">In many countries, donations to registered charities or NGOs are tax-deductible.</p>
+                                        <div className="leftdiv3 flex flex-col items-start w-11/12 md:w-5/12">
+                                            <h1 className="font-bold text-2xl md:text-4xl">Tax Benefits:</h1>
+                                            <p className="text-lg md:text-2xl">In many countries, donations to registered charities or NGOs are tax-deductible.</p>
                                         </div>
                                     </li>
                                 </ul>
                             </div>
 
                             <div className="howtopoints flex flex-col w-full h-full">
-                                <div className="text-6xl flex flex-col items-center font-bold justify-center">
+                                <div className="text-4xl md:text-6xl flex flex-col items-center font-bold justify-center text-center">
                                     <h1>How to Donate?</h1>
-                                    <p className="text-2xl">comming soon</p>
+                                    <p className="text-lg md:text-2xl">comming soon</p>
                                 </div>
                                 <ul className="flex flex-col space-y-4 items-center">
                                     {/* <li className="flex w-full justify-start" style={{ padding: '2%' }}>
@@ -328,31 +328,31 @@ export default function Page2() {
                                         </svg>
                                     </li> */}
                                     {/* <li className="flex w-full justify-start" style={{ padding: '2%' }}>
-                                        <div className="leftli1 flex flex-col items-start w-5/12" style={{ margin: '1%' }}>
+                                        <div className="leftli1 flex flex-col items-start w-11/12 md:w-5/12" style={{ margin: '1%' }}>
                                             <h1 className="font-bold text-xl">Support for Important Causes:</h1>
                                             <p>Your contributions can help fund essential programs and services, such as education, healthcare, and environmental conservation.</p>
                                         </div>
                                     </li>
                                     <li className="flex w-full justify-end" style={{ padding: '2%' }}>
-                                        <div className="rightli1 flex flex-col items-end text-right w-5/12" style={{ margin: '1%' }}>
+                                        <div className="rightli1 flex flex-col items-end text-right w-11/12 md:w-5/12" style={{ margin: '1%' }}>
                                             <h1 className="font-bold text-xl">Positive Impact on Communities:</h1>
                                             <p>Donations can lead to significant improvements in the quality of life for individuals and communities in need.</p>
                                         </div>
                                     </li>
                                     <li className="flex w-full justify-start" style={{ padding: '2%' }}>
-                                        <div className="leftli2 flex flex-col items-start w-5/12" style={{ margin: '1%' }}>
+                                        <div className="leftli2 flex flex-col items-start w-11/12 md:w-5/12" style={{ margin: '1%' }}>
                                             <h1 className="font-bold text-xl">Advancement of Social Justice:</h1>
                                             <p>NGOs often work on issues related to human rights and social equity, helping to address and rectify injustices.</p>
                                         </div>
                                     </li>
                                     <li className="flex w-full justify-end" style={{ padding: '2%' }}>
-                                        <div className="rightli2 flex flex-col items-end text-right w-5/12" style={{ margin: '1%' }}>
+                                        <div className="rightli2 flex flex-col items-end text-right w-11/12 md:w-5/12" style={{ margin: '1%' }}>
                                             <h1 className="font-bold text-xl">Personal Fulfillment:</h1>
                                             <p>Contributing to causes you care about can provide a sense of satisfaction and purpose.</p>
                                         </div>
                                     </li>
                                     <li className="flex w-full justify-start" style={{ padding: '2%' }}>
-                                        <div className="leftli3 flex flex-col items-start w-5/12" style={{ margin: '1%' }}>
+                                        <div className="leftli3 flex flex-col items-start w-11/12 md:w-5/12" style={{ margin: '1%' }}>
                                             <h1 className="font-bold text-xl">Tax Benefits:</h1>
                                             <p>In many countries, donations to registered charities or NGOs are tax-deductible.</p>
                                         </div>

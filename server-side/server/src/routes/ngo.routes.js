@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { upload } from "../middlewares/multer.middleware.js";
-import { verifyJWT } from "../middlewares/auth.middleware.js";
+import { verifyJWT, authorizeRoles } from "../middlewares/auth.middleware.js";
 import {
   getAllNgo,
   getNgobyAdmin,
@@ -12,6 +12,7 @@ import {
 const router = Router();
 router.route("/register").post(
   verifyJWT,
+  authorizeRoles("NGO"),
   upload.fields([
     {
       name: "idProof",
@@ -29,9 +30,9 @@ router.route("/getNgos").get(getAllNgo);
 
 router.route("/getNgo/:id").get(getNgobyId);
 
-router.route("/getUserNgo").get(verifyJWT, getNgobyAdmin);
+router.route("/getUserNgo").get(verifyJWT, authorizeRoles("NGO"), getNgobyAdmin);
 
 router
   .route("/getNgo/:id/update")
-  .patch(verifyJWT, upload.fields([{ name: "logo", maxCount: 1 }]), updateNgo);
+  .patch(verifyJWT, authorizeRoles("NGO"), upload.fields([{ name: "logo", maxCount: 1 }]), updateNgo);
 export default router;

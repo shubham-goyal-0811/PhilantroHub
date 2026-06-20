@@ -26,7 +26,7 @@ export default function Profile() {
 
     const fetchProfile = async () => {
         try {
-            const response = await fetch('http://localhost:8000/api/v1/users/profile', {
+            const response = await fetch('/api/v1/users/profile', {
                 method: 'GET',
                 credentials: 'include',
                 headers: {
@@ -59,7 +59,7 @@ export default function Profile() {
 
     const handleChange = async () => {
         try {
-            const response = await fetch('http://localhost:8000/api/v1/users/profile/update', {
+            const response = await fetch('/api/v1/users/profile/update', {
                 method: 'PATCH',
                 credentials: 'include',
                 headers: {
@@ -88,7 +88,7 @@ export default function Profile() {
 
     const handlePasswordChangeSubmit = async () => {
         try {
-            const response = await fetch('http://localhost:8000/api/v1/users/change-password', {
+            const response = await fetch('/api/v1/users/change-password', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
@@ -117,13 +117,13 @@ export default function Profile() {
     return (
         <>
             <Header />
-            <div className="min-h-screen bg-off-white flex justify-center items-center bg-[#d2c9c9]">
-                <div className="bg-white p-10 rounded-2xl shadow-2xl w-full max-w-4xl hover:scale-105 duration-300">
-                    <div className="flex items-center justify-between mb-6">
+            <div className="min-h-screen bg-off-white flex justify-center items-center bg-[#d2c9c9] p-4 pt-24 md:pt-4">
+                <div className="bg-white p-6 md:p-10 rounded-2xl shadow-2xl w-full max-w-4xl md:hover:scale-105 duration-300">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
                         <div className="name">
-                            <h1 className="text-3xl font-bold">{updatedProfile.fullName}</h1>
+                            <h1 className="text-2xl md:text-3xl font-bold">{updatedProfile.fullName}</h1>
                         </div>
-                        <div className="">
+                        <div className="flex flex-wrap gap-2">
                             {!isEditing && !isChangingPassword && (
                                 <button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700 duration-200" onClick={() => setIsEditing(true)}>
                                     Edit Profile

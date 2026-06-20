@@ -38,11 +38,11 @@ export default function Login () {
     
         const backendUrl = '/api/v1/users/login';
     
-        axios.post(backendUrl, formData)
+        axios.post(backendUrl, formData, { withCredentials: true })
             .then(response => {
-                console.log('Success:', response.data);
-                login({ username });
-                navigate('/');
+                const loggedInUser = response.data?.data?.user || {};
+                login({ username: loggedInUser.username || username, role: loggedInUser.role });
+                navigate(loggedInUser.role === 'Admin' ? '/admin' : '/');
             })
             .catch(error => {
                 console.error('Error:', error);

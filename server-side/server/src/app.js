@@ -4,7 +4,7 @@ import cookieparser from 'cookie-parser'
 
 const app = express();
 app.use(cors({
-    origin : process.env.origin || 'http://localhost:5173' ,
+    origin : process.env.CORS_ORIGIN || 'http://localhost:5173' ,
     credentials : true
 }))
 
@@ -21,4 +21,7 @@ app.use("/api/v1/ngo",ngoRouter);
 
 import ticketRouter from './routes/tickets.routes.js';
 app.use("/api/v1/ticket",ticketRouter);
+
+import adminRouter from './routes/admin.routes.js';
+app.use("/api/v1/admin",adminRouter);
 export {app};

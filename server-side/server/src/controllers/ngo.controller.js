@@ -141,7 +141,10 @@ const updateNgo = asyncHandler(async (req, res) => {
     throw new ApiError(401, "Unauthorized");
   }
   const { description, address, category, contactNo } = req.body;
-  const logoPath = req.files?.logo[0].path;
+  let logoPath;
+  if (req.files && Array.isArray(req.files.logo) && req.files.logo.length > 0) {
+    logoPath = req.files.logo[0].path;
+  }
   if (
     !description &&
     !address &&
@@ -152,12 +155,6 @@ const updateNgo = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Add something to change");
   }
 
-  const logo = await uploadOnCloudinary(logoPath);
-  if (!logo) {
-    throw new ApiError(500, "Something went wrong while updating the logo");
-  }
-
-  
   const ngo = await Ngo.findById(id);
   if (!ngo) {
     throw new ApiError(500, "Something went wrong while updtaing the ngo");
@@ -168,13 +165,17 @@ const updateNgo = asyncHandler(async (req, res) => {
   if(address){
     ngo.address = address;
   }
-  // if(category){
-  //   ngo.category = category;
-  // }
+  if(category){
+    ngo.category = category;
+  }
   if(contactNo){
     ngo.contactNo = contactNo;
   }
   if(logoPath){
+    const logo = await uploadOnCloudinary(logoPath);
+    if (!logo) {
+      throw new ApiError(500, "Something went wrong while updating the logo");
+    }
     ngo.logo = logo.url;
   }
   await ngo.save();
