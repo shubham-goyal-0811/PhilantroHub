@@ -199,7 +199,7 @@ body {
     }
 
     .header_nav {
-        font-size: 140%;
+        font-size: 110%;
     }
 
     .options {
@@ -207,11 +207,11 @@ body {
     }
 
     .logo img {
-        width: 5rem;
+        width: 4rem;
     }
 
     .ans {
-        width: 70%;
+        width: 90%;
     }
 
     .tbl {
@@ -242,11 +242,31 @@ body {
     .grid1,
     .grid2 {
         display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
         margin: 1%;
     }
 }
 
-/*NGO page css*/
+@media (max-width: 600px) {
+    .header_nav {
+        font-size: 95%;
+    }
+
+    .logo img {
+        width: 3rem;
+    }
+
+    .quotes {
+        font-size: 100%;
+    }
+
+    .ans,
+    .desc {
+        width: 95%;
+    }
+}
+
 .parentmain1 {
     font-family: "Afacad Flux", sans-serif;
 }
@@ -442,10 +462,6 @@ body {
 
 }
 
-.quotes {
-    animation: quotesani 4s ease-in-out;
-}
-
 .fade-in {
     animation: fadeIn 0.5s ease-in-out;
 }
@@ -617,31 +633,30 @@ canvas {
 }
 
 @keyframes bounceIn {
-    0% {
-      transform: scale(0);
-    }
-    50% {
-      transform: scale(1.2);
-    }
-    100% {
-      transform: scale(1);
-    }
+  0% {
+    transform: scale(0);
   }
-  
-  .animate-button {
-    animation: bounceIn 0.5s ease-out forwards;
+  50% {
+    transform: scale(1.2);
   }
-  
-  @keyframes slideIn {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(0);
-    }
+  100% {
+    transform: scale(1);
   }
-  
-  .animate-slide {
-    animation: slideIn 0.8s ease-out forwards;
+}
+
+.animate-button {
+  animation: bounceIn 0.5s ease-out forwards;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(-100%);
   }
-  
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-slide {
+  animation: slideIn 0.8s ease-out forwards;
+}

@@ -10,19 +10,19 @@ export default function Page4() {
         <>
             <div className="frontpage_main4 flex flex-col w-auto items-center">
                 <div className="frontpage_part4 w-full">
-                    <div className="flex text-4xl font-bold flex justify-center" style={{marginTop: '1%'}}>
+                    <div className="flex text-2xl md:text-4xl font-bold flex justify-center text-center" style={{marginTop: '1%'}}>
                         <h1>Know Our Team</h1>
                     </div>
 
-                    <div className="pps flex h-full justify-evenly" style={{backgroundImage : `url{${TeamPic}}`}}>
+                    <div className="pps flex flex-wrap h-full justify-evenly" style={{backgroundImage : `url{${TeamPic}}`}}>
 
                         <div className="grid1 grid grid-cols-2 grid-rows-2 gap-4 p1">
                             <div className="shwetank flex flex-col items-center bg-slate-100 rounded-3xl relative group">
-                                <div className="shwetapp bg-cover bg-center w-80 h-80">
+                                <div className="shwetapp bg-cover bg-center w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80">
                                     <img src={Shwetank} alt="" />
                                 </div>
 
-                                <div className="memdesc1 absolute text-3xl text-center w-80 h-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div className="memdesc1 absolute text-3xl text-center w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                     <h1>Hey, I am Shwetank Dohroo Working on the Frontend of PhilantroHub</h1>
                                 </div>
 
@@ -36,10 +36,10 @@ export default function Page4() {
                             <div></div>
 
                             <div className="shubham flex flex-col items-center bg-slate-100 rounded-3xl relative group">
-                                <div className="goyalpp bg-cover bg-center w-80 h-80">
+                                <div className="goyalpp bg-cover bg-center w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80">
                                     <img className="bottom-0" src={Shubham} alt="" />
                                 </div>
-                                <div className="memdesc2 absolute text-3xl text-center w-80 h-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div className="memdesc2 absolute text-3xl text-center w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                     <h1>Hey, I am Shubham Goyal Working on Backend of the PhilantroHub</h1>
                                 </div>
                                 <h1 className="text-2xl" style={{ padding: '1%' }}>Shubham Goyal</h1>
@@ -52,20 +52,20 @@ export default function Page4() {
                             <div></div>
 
                             <div className="Madan flex flex-col items-center bg-slate-100 rounded-3xl relative group">
-                                <div className="madanpp bg-cover bg-center w-80 h-80">
+                                <div className="madanpp bg-cover bg-center w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80">
                                     <img src={Madan} alt="" />
                                 </div>
-                                <div className="memdesc4 absolute text-3xl text-center w-80 h-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div className="memdesc4 absolute text-3xl text-center w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                     <h1>Hey, I am Srishti Madaan Working on Data gathering for making of the PhilantroHub</h1>
                                 </div>
                                 <h1 className="text-2xl" style={{ padding: '1%' }}>Srishti Madaan</h1>
                             </div>
 
                             <div className="Siddham flex flex-col items-center bg-slate-100 rounded-3xl relative group">
-                                <div className="siddpp bg-cover bg-center w-80 h-80">
+                                <div className="siddpp bg-cover bg-center w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80">
                                     <img src={Siddham} alt="" />
                                 </div>
-                                <div className="memdesc3 absolute text-3xl text-center w-80 h-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div className="memdesc3 absolute text-3xl text-center w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                     <h1>Hey, I am Siddham Jain Working on implementing Chatbot inside our PhilantroHub</h1>
                                 </div>
                                 <h1 className="text-2xl" style={{ padding: '1%' }}>Siddham Jain</h1>

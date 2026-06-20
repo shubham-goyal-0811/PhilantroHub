@@ -25,3 +25,20 @@ export const verifyJWT = asyncHandler(async (req,_,next)=>{
         throw new ApiError(401,error?.message || "Invalid access token");
     }
 })
+
+// Role-Based Access Control: allow only the listed roles through.
+// Must run after verifyJWT so that req.user is populated.
+export const authorizeRoles = (...allowedRoles) => {
+    return asyncHandler(async (req, _, next) => {
+        if (!req.user) {
+            throw new ApiError(401, "Unauthorized request");
+        }
+        if (!allowedRoles.includes(req.user.role)) {
+            throw new ApiError(
+                403,
+                `Access denied: this action requires one of the following roles: ${allowedRoles.join(", ")}`
+            );
+        }
+        next();
+    });
+};

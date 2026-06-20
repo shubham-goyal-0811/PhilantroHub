@@ -7,23 +7,31 @@ import Signup from './components/Signup';
 import Ngo from './components/ngo/Ngofp';
 import ViewMore from './components/ngo/ViewMore';
 import Profile from './components/Profile/Profile';
+import AdminDashboard from './components/Admin/AdminDashboard';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
     <Router>
       <Routes>
-        //frontpage and header
         <Route
           path="/" element={<>
           <Header />
           <Frontpage />
           </>}/>
-          //login
         <Route path="/login" element={<Login />} />
         <Route path="/users/profile" element={<Profile />} />
         <Route path="/ngo" element={<Ngo />} />
         <Route path="/login/signup" element={<Signup />} />
         <Route path="/view-more/:name" element={<ViewMore />} />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute allowedRoles={['Admin']}>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </Router>
   );

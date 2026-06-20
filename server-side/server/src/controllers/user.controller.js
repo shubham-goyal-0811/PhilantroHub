@@ -9,13 +9,13 @@ import fs from 'fs';
 const generateAccessandRfreshToken = async (userId)=>{  
     try{
         const user = await User.findById(userId)
-        const acessToken = user.generateAccessToken() 
+        const accessToken = user.generateAccessToken()
         const refreshToken = user.generateRefreshToken()
 
         user.refreshToken = refreshToken;
         await user.save({validateBeforeSave: false})
 
-        return {acessToken,refreshToken};
+        return {accessToken,refreshToken};
     }
     catch (error){
         throw new ApiError(500, "Something Went Wrong while generating access and refresh token");
@@ -38,6 +38,13 @@ const registerUser = asyncHandler(async (req,res) =>{
 
     if(confirmpassword !== password){
         throw new ApiError(400,"Password and confirm password should match");
+    }
+
+    // Admin accounts cannot be created through public registration.
+    // Only "User" and "NGO" may self-register; admins are provisioned via
+    // the create-admin script or promoted by an existing admin.
+    if(!["User","NGO"].includes(role)){
+        throw new ApiError(400,"Invalid role. Allowed roles are 'User' or 'NGO'");
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -128,21 +135,21 @@ const loginUser = asyncHandler(async (req,res)=>{
     //     throw new ApiError(401,"No User found ");
     // }
 
-    const {acessToken,refreshToken} = await generateAccessandRfreshToken(user._id);
+    const {accessToken,refreshToken} = await generateAccessandRfreshToken(user._id);
     user.refreshToken = refreshToken;
     const loggedInUser = await User.findById(user._id).select("-password -refreshToken");
 
-    
+
     const options = {
         httpOnly : true,
-        secure : true,  
+        secure : true,
     }
 
-    return res.status(200).cookie("accessToken",acessToken,options).cookie("refreshToken",refreshToken,options)
+    return res.status(200).cookie("accessToken",accessToken,options).cookie("refreshToken",refreshToken,options)
     .cookie("avatar",user.avatar,options)
     .json(
         new ApiResponse(200,{
-            user : loggedInUser,acessToken,refreshToken
+            user : loggedInUser,accessToken,refreshToken
         },
         "User Logged In Successfully"
     )
@@ -167,8 +174,9 @@ const logoutUser = asyncHandler(async (req,res)=>{
     }
 
     return res.status(200)
-    .clearCookie("acessToken",options)
+    .clearCookie("accessToken",options)
     .clearCookie("refreshToken",options)
+    .clearCookie("avatar",options)
     .json(new ApiResponse(200,"User logged out"))
 })
 
@@ -194,16 +202,16 @@ const refreshAccessToken = asyncHandler (async(req,res)=>{
             secure : true
         }
     
-        const {acessToken, newRefreshToken } = await generateAccessandRfreshToken(user._id);
-    
+        const {accessToken, refreshToken : newRefreshToken } = await generateAccessandRfreshToken(user._id);
+
         return res.status(200)
-        .cookie("acessToken",acessToken,options)
+        .cookie("accessToken",accessToken,options)
         .cookie("refreshToken",newRefreshToken,options)
         .json(
             new ApiResponse(
                 200,
                 {
-                    acessToken,refreshToken : newRefreshToken  
+                    accessToken,refreshToken : newRefreshToken
                 },
                 "Access token refreshed succesfully"
             )

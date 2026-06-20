@@ -44,23 +44,23 @@ export default function Page1() {
     }, [qts.length]);
 
     return (
-        <div className="frontpage_main1 flex flex-col w-auto items-center h-screen bg-black" style={{ padding: '1%', height: '92vh' }}>
+        <div className="frontpage_main1 flex flex-col w-auto items-center min-h-screen bg-black" style={{ padding: '1%' }}>
             <div className="frontpape_part1 flex flex-col w-full h-full justify-between bg-opacity-0" style={{ backgroundImage: `url(${Stars})`, backgroundPosition: 'center', }}>
-                <div className="front_content flex items-center justify-evenly w-full h-full">
-                    <div className="flex flex-col w-6/12 h-full justify-center items-start">
+                <div className="front_content flex flex-col md:flex-row items-center justify-evenly w-full h-full gap-6 md:gap-0">
+                    <div className="flex flex-col w-full md:w-6/12 h-full justify-center items-start">
                         <div className="title flex flex-col justify-center" style={{ marginTop: '1.1%' }}>
-                            <div className="title1 lg:text-8xl md:text-6xl sm:text-4xl font-bold text-white">
+                            <div className="title1 text-5xl sm:text-6xl md:text-6xl lg:text-8xl font-bold text-white">
                                 <Typewriter options={{
                                     strings: ['PhilantroHub'], autoStart: true, loop: true, delay: 75, deleteSpeed: 50,
                                 }}
                                 />
                             </div>
                         </div>
-                        <div className="quotes w-full flex items-center text-start justify-center text-white relative" style={{ margin: '1%', padding: '1%', height: '25vh' }}>
+                        <div className="quotes w-full flex items-center text-start justify-center text-white relative min-h-[25vh]" style={{ margin: '1%', padding: '1%' }}>
                             <div className="absolute inset-0 bg-black bg-opacity-40 rounded-2xl"></div>
                             <div className="flex flex-col act_qot w-full h-full items-start justify-center relative">
-                                <h1 className="font-bold text-3xl">{qts[currentQuoteIndex].quote}</h1>
-                                <p className="text-xl">{qts[currentQuoteIndex].by}</p>
+                                <h1 className="font-bold text-lg sm:text-2xl md:text-3xl">{qts[currentQuoteIndex].quote}</h1>
+                                <p className="text-base sm:text-lg md:text-xl">{qts[currentQuoteIndex].by}</p>
                             </div>
                         </div>
 
@@ -68,7 +68,7 @@ export default function Page1() {
                             <Button />
                         </div>
                     </div>
-                    <div className="picture w-10/12 sm:w-full h-full rounded-full">
+                    <div className="picture w-10/12 sm:w-full md:w-1/2 h-[40vh] md:h-full rounded-full">
                         <Canvas camera={{ position: [0, 0, 2], fov: 75 }}>
                             <ambientLight intensity={1.5} />
                             <OrbitControls enableZoom={false} />
